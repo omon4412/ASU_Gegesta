@@ -1,0 +1,71 @@
+﻿@page
+@model ASU_Degesta.Pages.Roles.Index
+@using Microsoft.AspNetCore.Identity
+@using ASU_Degesta.Models
+
+@inject SignInManager<DegestaUser> SignInManager
+@inject UserManager<DegestaUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+@{
+    ViewData["Title"] = "Должности";
+}
+<partial name="_StatusMessage" for="StatusMessage"/>
+<h1>@ViewData["Title"]</h1>
+
+<form id="" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-floating">
+        <input asp-for="Input.NewRole" class="form-control" aria-required="true"/>
+        <label class="form-label"></label>
+        <span class="text-danger"></span>
+    </div>
+    <button id="" type="submit" class="w-100 btn btn-lg btn-primary">Добавить должность</button>
+</form>
+
+<table class="table">
+    @foreach (var role in RoleManager.Roles.ToList())
+    {
+        <tr>
+            @* <td>@(user.Name=="" || user.Name==null?user.Email:user.Name)</td> *@
+            <td>@role.Name</td>
+            @* <td> *@
+            @*     <form asp-page-handler="edit" asp-route-id="@role.Id" method="post"> *@
+            @*         <button type="submit" class="btn btn-sm btn-primary"> *@
+            @*             Редактировать *@
+            @*         </button> *@
+            @*     </form> *@
+            @* </td> *@
+            <td>
+                <form asp-page-handler="delete" asp-route-id="@role.Id" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+@* <select name="example"> *@
+@*     @foreach (var role in RoleManager.Roles.ToList()) *@
+@*     { *@
+@*         <option value=@role.Id>@role.Name</option> *@
+@*     } *@
+@* </select> *@
+
+@* <h2>Список сотрудников</h2> *@
+<br><a class="btn btn-sm btn-primary" asp-page="UserList">Список сотрудников</a>
+
+
+@* @{ *@
+@*     //UserManager.AddToRoleAsync(UserManager.GetUserAsync(User).Result, ASU_Degesta.Models.Constants.AdminRole); *@
+@*     var bannedUser = UserManager.FindByNameAsync(User.Identity.Name).Result; *@
+@*     if (bannedUser != null) *@
+@*     { *@
+@*         await UserManager.AddToRoleAsync(bannedUser, "test"); *@
+@*         await SignInManager.RefreshSignInAsync(bannedUser); *@
+@*         //"Succesfully banned user " + Input.UsernameToBan + "."; *@
+@*     } *@
+@* } *@

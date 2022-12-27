@@ -1,7 +1,50 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ASU_Degesta.Data;
+using ASU_Degesta.Models;
+using Microsoft.AspNetCore.Authorization;
 
+var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("ASU_DegestaContextConnection") ?? throw new InvalidOperationException("Connection string 'ASU_DegestaContextConnection' not found.");
+
+builder.Services.AddDbContext<ASU_DegestaContext>(options =>
+    options.UseMySQL(connectionString));
+
+// builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//     .AddEntityFrameworkStores<ASU_DegestaContext>();
+
+builder.Services.AddDefaultIdentity<DegestaUser>(
+        options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ASU_DegestaContext>();
+
+builder.Services.Configure<SecurityStampValidatorOptions>(o => o.ValidationInterval = TimeSpan.FromSeconds(10));
+
+// using (var scope = app.Services.CreateScope())
+// {
+//     var services = scope.ServiceProvider;
+//     var context = services.GetRequiredService<ApplicationDbContext>();
+//     //context.Database.Migrate();
+//     // requires using Microsoft.Extensions.Configuration;
+//     // Set password with the Secret Manager tool.
+//     // dotnet user-secrets set SeedUserPW <pw>
+//
+//     var testUserPw = builder.Configuration.GetValue<string>("SeedUserPW");
+//
+//     await SeedData.Initialize(services, testUserPw);
+// }
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
 
 var app = builder.Build();
 
@@ -17,9 +60,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+
 
 app.Run();

@@ -1,0 +1,31 @@
+﻿@page
+@using ASU_Degesta.Models
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ASU_Degesta.Pages.Roles.UserList
+
+@inject UserManager<DegestaUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<h2>Список сотрудников</h2>
+<table class="table">
+    @foreach (var user in UserManager.Users.ToList())
+    {
+        <tr>
+            <td>@(user.Name=="" || user.Name==null?user.Email:user.Name)</td>
+            <td>
+                
+                @foreach (IdentityRole role in RoleManager.Roles.ToList())
+                {
+                    if (await UserManager.IsInRoleAsync(user, role.Name))
+                    {
+                        <button type="button" disabled class="btn btn-outline-dark">@role.Name</button>
+                    }
+                }
+            </td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-page="EditUser" asp-route-userid="@user.Id">Подробнее</a>
+            </td>
+        </tr>
+    }
+</table>

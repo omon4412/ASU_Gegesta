@@ -1,10 +1,34 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using ASU_Degesta.Models
 @model IndexModel
+@inject SignInManager<DegestaUser> SignInManager
+@inject UserManager<DegestaUser> UserManager
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Стартовая страница";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">АСУ ООО "Дежеста"</h1>
+
+    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Домашняя страница</a>
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Справочники</a>
+        }
+        if (User.IsInRole("HR") || User.IsInRole("admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/Roles/Index">Управление персоналом</a>
+        }
+        if (User.IsInRole("Бухгалтер") || User.IsInRole("admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Бухгалтерия</a>
+        }
+        if (User.IsInRole("Начальник ПЭО") || User.IsInRole("Сотрудник ПЭО") || User.IsInRole("admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Планово-экономический отдел</a>
+        }
+    }
+    @* <p>Learn about <a target="_blank" href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
 </div>

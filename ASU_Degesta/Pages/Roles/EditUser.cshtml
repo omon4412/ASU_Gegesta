@@ -1,0 +1,55 @@
+﻿@page
+@model EditUser
+@using Microsoft.AspNetCore.Identity
+@using ASU_Degesta.Models
+@inject UserManager<DegestaUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<h2>Информация о сотруднике @(Model.User.Name == "" || Model.User.Name == null ? Model.User.Email : Model.User.Name)</h2>
+
+<form method="post">
+    <input type="hidden" name="userId" value="@Model.User.Id"/>
+    <table class="table">
+        <tr>
+            <td>ФИО</td>
+            <td>
+                <input asp-for="Input.Name" name="name" value="@Model.User.Name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Почта</label>
+            </td>
+            <td>
+                <input asp-for="Input.Email" name="email" value="@Model.User.Email"/>
+            </td>
+        </tr>
+    </table>
+    <label>Должности</label>
+    <div class="form-group">
+        @foreach (IdentityRole role in RoleManager.Roles.ToList())
+        {
+            <input type="checkbox" name="roles" value="@role.Name"
+                   @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "")/>
+            @role.Name<br/>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+
+</form>
+@if (Model.User.LockoutEnd == null)
+{
+    <form asp-page-handler="block" asp-route-id="@Model.User.Id" method="post">
+        <button type="submit" class="btn btn-sm btn-danger">
+            Заблокировать
+        </button>
+    </form>
+}
+else
+{
+    <form asp-page-handler="unblock" asp-route-id="@Model.User.Id" method="post">
+        <button type="submit" class="btn btn-sm btn-primary">
+            Разблокировать
+        </button>
+    </form>
+}
