@@ -1,0 +1,36 @@
+@page
+@model ASU_Degesta.Pages.Classifier.CreateModel
+
+@{
+    ViewData["Title"] = "Создать";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Создать</h1>
+
+@* <h4>types_of_products</h4> *@
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="types_of_products.code" class="control-label"></label>
+                <input asp-for="types_of_products.code" class="form-control"/>
+                <span asp-validation-for="types_of_products.code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="types_of_products.Name" class="control-label"></label>
+                <input asp-for="types_of_products.Name" class="form-control"/>
+                <span asp-validation-for="types_of_products.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Назад в список</a>
+</div>

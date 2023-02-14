@@ -1,0 +1,45 @@
+﻿@page
+@model CreateModel
+
+@{
+    ViewData["Title"] = "Создать новую зарплатную ведомость";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.doc_name" class="control-label"></label>
+                <input asp-for="payroll_statement.doc_name" class="form-control"/>
+                <span asp-validation-for="payroll_statement.doc_name" class="text-danger"></span>
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="payroll_statement.doc_id" class="form-control d-none" value="uuidv4()"/>
+                <span asp-validation-for="payroll_statement.doc_id" class="text-danger d-none"></span>
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="payroll_statement.creation_date" class="control-label d-none"></label>
+                <input asp-for="payroll_statement.creation_date" class="form-control d-none" value="uuidv4"/>
+                <span asp-validation-for="payroll_statement.creation_date" class="text-danger d-none"></span>
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="payroll_statement.creator" class="control-label d-none"></label>
+                <input asp-for="payroll_statement.creator" class="form-control d-none" value="uuidv4"/>
+                <span asp-validation-for="payroll_statement.creator" class="text-danger d-none"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Вернуться к списку</a>
+</div>

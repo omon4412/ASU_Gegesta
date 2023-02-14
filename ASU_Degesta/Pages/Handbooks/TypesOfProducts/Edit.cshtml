@@ -1,0 +1,32 @@
+@page
+@model ASU_Degesta.Pages.Handbooks.TypesOfProducts.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+@* <h4>TypesOfProducts</h4> *@
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TypesOfProducts.TypesOfProductsId"/>
+            <div class="form-group">
+                <label asp-for="TypesOfProducts.Name" class="control-label"></label>
+                <input asp-for="TypesOfProducts.Name" class="form-control"/>
+                <span asp-validation-for="TypesOfProducts.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Назад в список</a>
+</div>

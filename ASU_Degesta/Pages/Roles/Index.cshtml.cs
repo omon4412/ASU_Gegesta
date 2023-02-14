@@ -14,6 +14,7 @@ public class Index : PageModel
     private readonly UserManager<DegestaUser> _userManager;
     private readonly SignInManager<DegestaUser> _signInManager;
     public readonly RoleManager<IdentityRole> _roleManager;
+
     public Index(UserManager<DegestaUser> userManager,
         SignInManager<DegestaUser> signInManager, RoleManager<IdentityRole> roleManager)
     {
@@ -21,6 +22,7 @@ public class Index : PageModel
         _signInManager = signInManager;
         _roleManager = roleManager;
     }
+
     public class InputModel
     {
         /// <summary>
@@ -31,12 +33,11 @@ public class Index : PageModel
         [Display(Name = "Новая должность")]
         public string NewRole { get; set; }
     }
-    [BindProperty]
-    public InputModel Input { get; set; }
-    
-    [TempData]
-    public string StatusMessage { get; set; }
-    
+
+    [BindProperty] public InputModel Input { get; set; }
+
+    [TempData] public string StatusMessage { get; set; }
+
     public async void OnPost()
     {
         Console.WriteLine(Input.NewRole);
@@ -50,7 +51,7 @@ public class Index : PageModel
         if (User.Identity != null)
             await _userManager.AddToRoleAsync(_userManager.FindByNameAsync(User.Identity.Name).Result, Input.NewRole);
     }
-    
+
     public async Task<IActionResult> OnPostDelete(string id)
     {
         IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -61,6 +62,7 @@ public class Index : PageModel
                 StatusMessage = "Админа удалить нельзя!";
                 return RedirectToAction("Index");
             }
+
             IdentityResult result = await _roleManager.DeleteAsync(role);
             if (result.Succeeded)
             {
@@ -71,10 +73,10 @@ public class Index : PageModel
                 StatusMessage = "Произошла ошибка!" + result.ToString();
             }
         }
-        
+
         return RedirectToAction("Index");
     }
-    
+
     public async Task<IActionResult> OnPostEdit(string id)
     {
         // IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -97,7 +99,7 @@ public class Index : PageModel
         //         StatusMessage = "Произошла ошибка!" + result.ToString();
         //     }
         // }
-        
+
         return RedirectToAction("Index");
     }
 }

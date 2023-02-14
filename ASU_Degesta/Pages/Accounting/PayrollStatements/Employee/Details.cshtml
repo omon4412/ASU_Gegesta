@@ -1,0 +1,63 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее " + Model.payroll_statement.employee_name;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.employee_number)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.employee_number)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.employee_name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.employee_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.salary)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.salary)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.bonus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.bonus)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.total_accrued)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.total_accrued)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.withheld)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.withheld)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.payroll_statement.to_issue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.payroll_statement.to_issue)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-docid="@Model.payroll_statement.doc_id" asp-route-id="@Model.payroll_statement?.id">Редактировать</a> |
+    <a asp-page="./Delete" asp-route-docid="@Model.payroll_statement.doc_id" asp-route-id="@Model.payroll_statement?.id">Удалить</a> |
+    <a asp-page="../Details" asp-route-id="@Model.payroll_statement.doc_id">Вернуться к списку</a>
+</div>

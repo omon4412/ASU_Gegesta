@@ -1,0 +1,52 @@
+@page
+@model DeleteModel
+
+@{
+    ViewData["Title"] = "Удалить запись";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecificationContractMaterials.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.SpecificationContractMaterials.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecificationContractMaterials.count_of_matherials)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecificationContractMaterials.count_of_matherials)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecificationContractMaterials.price_per_unit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecificationContractMaterials.price_per_unit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecificationContractMaterials.price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecificationContractMaterials.price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecificationContractMaterials.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.SpecificationContractMaterials.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="SpecificationContractMaterials.id"/>
+        <input type="submit" value="Удалить" class="btn btn-danger"/> |
+        <a asp-page="../Details" asp-route-id="@Model.SpecificationContractMaterials.doc_id">Вернуться к списку</a>
+    </form>
+</div>

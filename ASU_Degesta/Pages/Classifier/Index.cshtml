@@ -1,0 +1,57 @@
+@page
+@model ASU_Degesta.Pages.Classifier.IndexModel
+
+@{
+    ViewData["Title"] = "Классификатор";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Классификатор</h1>
+@if (User.IsInRole("admin"))
+{
+    <p>
+        <a asp-page="Create">Создать новое поле классификатора</a>
+    </p>
+}
+
+<a href="/" class="btn btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"></path>
+    </svg>
+    Вернуться к списку
+</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.types_of_products[0].code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.types_of_products[0].Name)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.types_of_products)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if (User.IsInRole("admin"))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.types_of_products_id">Редактировать</a>
+                    <a asp-page="./Delete" asp-route-id="@item.types_of_products_id">Удалить</a>
+                }
+                <a asp-page="./Details" asp-route-id="@item.types_of_products_id">Подробнее</a>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

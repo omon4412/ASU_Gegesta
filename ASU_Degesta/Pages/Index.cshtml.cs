@@ -12,6 +12,7 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private readonly UserManager<DegestaUser> _userManager;
     private readonly SignInManager<DegestaUser> _signInManager;
+
     public IndexModel(ILogger<IndexModel> logger, UserManager<DegestaUser> userManager,
         SignInManager<DegestaUser> signInManager)
     {

@@ -1,0 +1,29 @@
+@page
+@model ASU_Degesta.Pages.Handbooks.TypesOfProducts.DeleteModel
+
+@{
+    ViewData["Title"] = "Удалить";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Удалить</h1>
+
+<h3>Вы действительно хотите удалить это?</h3>
+<div>
+    @* <h4>TypesOfProducts</h4> *@
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TypesOfProducts.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TypesOfProducts.Name)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="TypesOfProducts.TypesOfProductsId"/>
+        <input type="submit" value="Удалить" class="btn btn-danger"/> |
+        <a asp-page="./Index">Назад в список</a>
+    </form>
+</div>

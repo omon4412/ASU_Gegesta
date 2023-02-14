@@ -12,9 +12,17 @@
     @foreach (var user in UserManager.Users.ToList())
     {
         <tr>
-            <td>@(user.Name=="" || user.Name==null?user.Email:user.Name)</td>
+            @if (user.LockoutEnd != null)
+            {
+                <td style="color: red;">@(user.Name == "" || user.Name == null ? user.Email : user.Name)</td>
+            }
+            else
+            {
+                <td>@(user.Name == "" || user.Name == null ? user.Email : user.Name)</td>
+            }
+
             <td>
-                
+
                 @foreach (IdentityRole role in RoleManager.Roles.ToList())
                 {
                     if (await UserManager.IsInRoleAsync(user, role.Name))
@@ -29,3 +37,7 @@
         </tr>
     }
 </table>
+
+<a class="btn btn-primary" asp-page="AddUser">Добавить сотрудника</a><br>
+
+<a asp-page="./Index">Назад к списку</a>

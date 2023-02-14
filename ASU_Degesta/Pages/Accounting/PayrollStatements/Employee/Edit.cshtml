@@ -1,0 +1,71 @@
+@page
+@model EditModel
+
+@{
+    ViewData["Title"] = "Редактировать " + Model.payroll_statement.employee_name;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1 xmlns="http://www.w3.org/1999/html">@ViewData["Title"]</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group d-none">
+                <label asp-for="payroll_statement.doc_id" class="control-label d-none"></label>
+                <input asp-for="payroll_statement.doc_id" class="form-control d-none" value="@Model.payroll_statement.doc_id"/>
+                <span asp-validation-for="payroll_statement.doc_id" class="text-danger d-none"></span>
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="payroll_statement.id" class="control-label d-none"></label>
+                <input asp-for="payroll_statement.id" class="form-control d-none" value="@Model.payroll_statement.id"/>
+                <span asp-validation-for="payroll_statement.id" class="text-danger d-none"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.employee_number" class="control-label"></label>
+                <input asp-for="payroll_statement.employee_number" class="form-control"/>
+                <span asp-validation-for="payroll_statement.employee_number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.employee_name" class="control-label"></label>
+                <input asp-for="payroll_statement.employee_name" class="form-control"/>
+                <span asp-validation-for="payroll_statement.employee_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.salary" class="control-label"></label>
+                <input asp-for="payroll_statement.salary" class="form-control"/>
+                <span asp-validation-for="payroll_statement.salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.bonus" class="control-label"></label>
+                <input asp-for="payroll_statement.bonus" class="form-control"/>
+                <span asp-validation-for="payroll_statement.bonus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.total_accrued" class="control-label"></label>
+                <input asp-for="payroll_statement.total_accrued" class="form-control"/>
+                <span asp-validation-for="payroll_statement.total_accrued" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.withheld" class="control-label"></label>
+                <input asp-for="payroll_statement.withheld" class="form-control"/>
+                <span asp-validation-for="payroll_statement.withheld" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="payroll_statement.to_issue" class="control-label"></label>
+                <input asp-for="payroll_statement.to_issue" class="form-control"/>
+                <span asp-validation-for="payroll_statement.to_issue" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.payroll_statement.doc_id">Вернуться к списку</a>
+</div>

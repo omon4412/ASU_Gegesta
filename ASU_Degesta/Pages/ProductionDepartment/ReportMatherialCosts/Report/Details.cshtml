@@ -1,0 +1,50 @@
+@page
+@model ASU_Degesta.Pages.ProductionDepartment.ReportMatherialCosts.Report.DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportMatherialCosts.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.ReportMatherialCosts.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportMatherialCosts.direct_costs)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportMatherialCosts.direct_costs)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportMatherialCosts.overhead_production_costs)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportMatherialCosts.overhead_production_costs)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportMatherialCosts.general_business_invoices)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportMatherialCosts.general_business_invoices)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportMatherialCosts.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.ReportMatherialCosts.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-docid="@Model.ReportMatherialCosts.doc_id" asp-route-id="@Model.ReportMatherialCosts?.id">Редактировать</a> |
+    <a asp-page="./Delete" asp-route-docid="@Model.ReportMatherialCosts.doc_id" asp-route-id="@Model.ReportMatherialCosts?.id">Удалить</a> |
+    <a asp-page="../Details" asp-route-id="@Model.ReportMatherialCosts.doc_id">Вернуться к списку</a>
+</div>

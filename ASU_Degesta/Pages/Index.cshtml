@@ -13,21 +13,31 @@
 
     <a class="nav-link text-dark" asp-area="" asp-page="/Index">Домашняя страница</a>
     @{
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity!.IsAuthenticated)
         {
-            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Справочники</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Handbooks/Index">Справочники</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Classifier/Index">Классификатор</a>
         }
+
         if (User.IsInRole("HR") || User.IsInRole("admin"))
         {
             <a class="nav-link text-dark" asp-area="" asp-page="/Roles/Index">Управление персоналом</a>
         }
         if (User.IsInRole("Бухгалтер") || User.IsInRole("admin"))
         {
-            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Бухгалтерия</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Accounting/Index">Бухгалтерия</a>
         }
         if (User.IsInRole("Начальник ПЭО") || User.IsInRole("Сотрудник ПЭО") || User.IsInRole("admin"))
         {
             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Планово-экономический отдел</a>
+        }
+        if (User.IsInRole("Менеджер по продажам") || User.IsInRole("admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/SalesDepartment/Index">Отдел продаж</a>
+        }
+        if (User.IsInRole("Начальник производственного отдела") || User.IsInRole("admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/ProductionDepartment/Index">Производственный отдел</a>
         }
     }
     @* <p>Learn about <a target="_blank" href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@

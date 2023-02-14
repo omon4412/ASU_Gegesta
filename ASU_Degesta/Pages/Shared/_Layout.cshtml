@@ -25,7 +25,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">О комплексе</a>
                     </li>
-                    
+
                 </ul>
                 <ul class="navbar-nav flex-grow-2">
                     <partial name="_LoginPartial"/>
@@ -39,7 +39,10 @@
         @RenderBody()
     </main>
 </div>
-
+<div id="cookie_notification">
+    <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, Вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках Вашего браузера.</p>
+    <button class="btn btn-primary cookie_accept">Принять</button>
+</div>
 <footer class="border-top footer text-muted">
     <div class="text-center">
         &copy; 2023 - АСУ Дежеста - <a asp-area="" asp-page="/Privacy">Privacy</a>

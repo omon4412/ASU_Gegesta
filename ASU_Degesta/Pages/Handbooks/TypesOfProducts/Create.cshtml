@@ -1,0 +1,87 @@
+@page
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ASU_Degesta.Pages.Handbooks.TypesOfProducts.CreateModel
+
+@{
+    ViewData["Title"] = "Создать";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Создать</h1>
+
+<h4>Вид изделия</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TypesOfProducts.TypesOfProductsId" class="control-label"></label>
+                <input asp-for="TypesOfProducts.TypesOfProductsId" class="form-control"/>
+                <span asp-validation-for="TypesOfProducts.TypesOfProductsId" class="text-danger"></span>
+            </div>
+
+            @* <div> *@
+            @*     <select> *@
+            @*         @foreach (var item in Model.classified) *@
+            @*         { *@
+            @*             if() *@
+            @*             <option value="@item.code">@item.Name</option> *@
+            @*         } *@
+            @*     </select>  *@
+            @* </div> *@
+
+            <div class="form-group">
+                <label asp-for="TypesOfProducts.Name" class="control-label"></label>
+                <input asp-for="TypesOfProducts.Name" class="form-control"/>
+                <span asp-validation-for="TypesOfProducts.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Назад к списку изделий</a>
+</div>
+
+<span class="caret">Классификатор</span>
+<table class="table nested">
+    @foreach (var item in Model.classified.OrderBy(c => c.code))
+    {
+        <tr>
+            <td>@item.code</td>
+            <td>@item.Name</td>
+        </tr>
+    }
+</table>
+@* *@
+@* @{ *@
+@*     List<List<string>> s1 = new List<List<string>>(); *@
+@*     List<string> s2 = new List<string>(); *@
+@*     List<string> s3 = new List<string>(); *@
+@*     Dictionary<string, string> d1 = new Dictionary<string, string>(); *@
+@* *@
+@*     foreach (var item in Model.classified.OrderBy(m => m.code).Where(m => m.code.Contains("2"))) *@
+@*     { *@
+@*         d1.Add(item.code, item.Name); *@
+@*     } *@
+@* } *@
+@* *@
+@* *@
+@* <ul id="myUL"> *@
+@*     <li> *@
+@*         <span class="caret">Коды изделий</span> *@
+@*     <ul class="nested"> *@
+@*         @foreach (var item in d1) *@
+@*         { *@
+@*             $1$ if() #1# *@
+@*             $1$ <li>@item.code</li> #1# *@
+@*         } *@
+@*         <li>Water</li> *@
+@*         <li>Coffee</li> *@
+@*     </ul> *@
+@* </ul> *@

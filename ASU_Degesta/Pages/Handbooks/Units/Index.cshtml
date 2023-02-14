@@ -1,0 +1,46 @@
+@page
+@model ASU_Degesta.Pages.Handbooks.Units.IndexModel
+
+@{
+    ViewData["Title"] = "Создать";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@* <h1>Создать</h1> *@
+@if (User.IsInRole("admin"))
+{
+    <p>
+        <a asp-page="Create">Создать новую единицу</a>
+    </p>
+}
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].Name)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Units)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if (User.IsInRole("admin"))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Units_ID">Редактировать</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Units_ID">Удалить</a>
+                }
+                <a asp-page="./Details" asp-route-id="@item.Units_ID">Подробнее</a>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a asp-page="../Index">Назад к списку</a>

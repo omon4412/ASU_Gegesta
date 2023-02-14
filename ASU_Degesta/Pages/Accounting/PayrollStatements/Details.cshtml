@@ -1,0 +1,114 @@
+﻿@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = @Model.info[0].doc_name;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.info[0].doc_name</h1>
+
+<p>
+    <a asp-route-docid="@Model.info[0].doc_id" class="btn btn-primary" asp-page="Employee/Create">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
+        </svg>
+        Добавить новую запись
+    </a>
+
+    <a class="btn btn-success" onclick="GetDocx()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+        </svg> Напечатать
+    </a>
+</p>
+<a asp-page="./Index" class="btn btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"></path>
+    </svg>
+    Вернуться к списку
+</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].employee_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].employee_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].bonus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].total_accrued)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].withheld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payroll_statement[0].to_issue)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.payroll_statement)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bonus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_accrued)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.withheld)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.to_issue)
+            </td>
+            <td>
+                <a asp-page="./Employee/Edit" asp-route-docid="@item.doc_id" asp-route-id="@item.id">Редактировать</a> |
+                <a asp-page="./Employee/Details" asp-route-docid="@item.doc_id" asp-route-id="@item.id">Подробнее</a> |
+                <a asp-page="./Employee/Delete" asp-route-docid="@item.doc_id" asp-route-id="@item.id">Удалить</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    function TestApi()
+    {
+        var lists = SendAjax("", "/api", false, "GET");
+        console.log(lists);
+    }
+    
+    function GetDocx() {
+        let data = {};
+        data['PayrollStatementNameId'] = JSON.parse('@Json.Serialize(Model.info[0])');
+        data['PayrollStatements'] = JSON.parse('@Json.Serialize(Model.payroll_statement)');
+        let info = {};
+        info['filename'] = '@Model.info[0].doc_name';
+        info['file_id'] = '@Model.info[0].doc_id';
+        GetFile('GetPayrollStatemetsDocx', data, info);
+        }
+                
+    </script>
+}

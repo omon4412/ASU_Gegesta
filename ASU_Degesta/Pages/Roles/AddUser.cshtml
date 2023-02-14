@@ -1,0 +1,43 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using ASU_Degesta.Models
+@model ASU_Degesta.Pages.Roles.AddUser
+@inject UserManager<DegestaUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<h2>Добавление сотрудника</h2>
+
+<form method="post">
+
+    <table class="table">
+        <tr>
+            <td>ФИО</td>
+            <td>
+                <input asp-for="Input.Name" name="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Почта</label>
+            </td>
+            <td>
+                <input asp-for="Input.Email" name="email"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Пароль</label>
+            </td>
+            <td>
+                <input asp-for="Input.Pass" type="password" name="pass"/>
+            </td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Добавить</button>
+
+</form>
+
+
+<a asp-page="./UserList">Назад к списку</a>

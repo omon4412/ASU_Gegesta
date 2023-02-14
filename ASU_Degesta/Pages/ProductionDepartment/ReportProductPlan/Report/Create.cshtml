@@ -1,0 +1,45 @@
+@page
+@using ASU_Degesta.Models.Handbooks
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ASU_Degesta.Pages.ProductionDepartment.ReportProductPlan.Report.CreateModel
+
+@{
+    ViewData["Title"] = "Создать новую запись";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="ReportProductPlan.doc_id" class="form-control d-none" value="@Model.idd"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportProductPlan.types_of_products_id" class="control-label"></label>
+                <select class="form-select" asp-for="ReportProductPlan.types_of_products_id" asp-items="@(new SelectList(Model.TypesOfProductsList, nameof(TypesOfProducts.TypesOfProductsId), nameof(TypesOfProducts.Name)))"></select>
+                <span asp-validation-for="ReportProductPlan.types_of_products_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportProductPlan.produced" class="control-label"></label>
+                <input asp-for="ReportProductPlan.produced" class="form-control"/>
+                <span asp-validation-for="ReportProductPlan.produced" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportProductPlan.units_id" class="control-label"></label>
+                <select class="form-select" asp-for="ReportProductPlan.units_id" asp-items="@(new SelectList(Model.UnitsList, nameof(Units.Units_ID), nameof(Units.Name)))"></select>
+                <span asp-validation-for="ReportProductPlan.units_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.idd">Вернуться к списку</a>
+</div>

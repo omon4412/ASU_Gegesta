@@ -1,8 +1,11 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ASU_Degesta.Data;
 using ASU_Degesta.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ASU_DegestaContextConnection") ?? throw new InvalidOperationException("Connection string 'ASU_DegestaContextConnection' not found.");
@@ -19,6 +22,8 @@ builder.Services.AddDefaultIdentity<DegestaUser>(
     .AddEntityFrameworkStores<ASU_DegestaContext>();
 
 builder.Services.Configure<SecurityStampValidatorOptions>(o => o.ValidationInterval = TimeSpan.FromSeconds(10));
+
+builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));
 
 // using (var scope = app.Services.CreateScope())
 // {
@@ -38,6 +43,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
@@ -47,6 +53,7 @@ builder.Services.AddAuthorization(options =>
 
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -64,8 +71,12 @@ app.UseAuthentication();;
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+//app.MapRazorPages();
 
-
+app.UseEndpoints(endpoints => {
+    endpoints.MapRazorPages();
+    //endpoints.MapControllerRoute("default", "api/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllers();
+});
 
 app.Run();
