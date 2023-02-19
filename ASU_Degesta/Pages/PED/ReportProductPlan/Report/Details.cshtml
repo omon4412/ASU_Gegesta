@@ -1,0 +1,38 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProductPlan.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.ReportProductPlan.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProductPlan.produced)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportProductPlan.produced)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProductPlan.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.ReportProductPlan.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-docid="@Model.ReportProductPlan.doc_id" asp-route-id="@Model.ReportProductPlan?.id">Редактировать</a> |
+    <a asp-page="./Delete" asp-route-docid="@Model.ReportProductPlan.doc_id" asp-route-id="@Model.ReportProductPlan?.id">Удалить</a> |
+    <a asp-page="../Details" asp-route-id="@Model.ReportProductPlan.doc_id">Вернуться к списку</a>
+</div>

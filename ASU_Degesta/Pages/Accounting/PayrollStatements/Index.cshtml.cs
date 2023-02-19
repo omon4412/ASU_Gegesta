@@ -21,7 +21,7 @@ namespace ASU_Degesta.Pages.Accounting.PayrollStatements
         {
             if (_context.payroll_statement_name_id != null)
             {
-                payroll_statement = await _context.payroll_statement_name_id.ToListAsync();
+                payroll_statement = await _context.payroll_statement_name_id.OrderByDescending(x=>x.creation_date).ToListAsync();
             }
         }
     }

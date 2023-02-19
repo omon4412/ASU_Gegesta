@@ -1,5 +1,6 @@
 using ASU_Degesta.Models;
 using ASU_Degesta.Models.Accounting;
+using ASU_Degesta.Models.PED;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ASU_Degesta.Models.SalesDepartment;
@@ -37,14 +38,20 @@ public class ASU_DegestaContext : IdentityDbContext<DegestaUser>
     public DbSet<SpecificationContractMaterials_id> SpecificationContractMaterials_id { get; set; } =
         default!;
 
-    public DbSet<ASU_Degesta.Models.ProductionDepartment.ReportProductPlan_id> ReportProductPlan_id { get; set; } =
+    public DbSet<ReportProductPlan_id> ReportProductPlan_id { get; set; } =
         default!;
 
-    public DbSet<ASU_Degesta.Models.ProductionDepartment.ReportProductPlan> ReportProductPlan { get; set; } = default!;
+    public DbSet<ReportProductPlan> ReportProductPlan { get; set; } = default!;
 
     public DbSet<ASU_Degesta.Models.ProductionDepartment.ReportMatherialCosts_id>
         ReportMatherialCosts_id { get; set; } = default!;
 
     public DbSet<ASU_Degesta.Models.ProductionDepartment.ReportMatherialCosts> ReportMatherialCosts { get; set; } =
+        default!;
+
+    public DbSet<ASU_Degesta.Models.PED.ReportProductCost> ReportProductCost { get; set; } =
+        default!;
+
+    public DbSet<ASU_Degesta.Models.PED.ReportProductCost_id> ReportProductCost_id { get; set; } =
         default!;
 }

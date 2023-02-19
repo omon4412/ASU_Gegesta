@@ -198,6 +198,112 @@ namespace ASU_Degesta.Migrations
                     b.ToTable("Units");
                 });
 
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProductCost", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("cost_price")
+                        .HasColumnType("double");
+
+                    b.Property<string>("doc_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("types_of_products_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("units_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("doc_id");
+
+                    b.HasIndex("types_of_products_id");
+
+                    b.HasIndex("units_id");
+
+                    b.ToTable("ReportProductCost");
+                });
+
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProductCost_id", b =>
+                {
+                    b.Property<string>("doc_id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("creation_date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("creator")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("doc_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("doc_id");
+
+                    b.ToTable("ReportProductCost_id");
+                });
+
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProductPlan", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("doc_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("produced")
+                        .HasColumnType("int");
+
+                    b.Property<string>("types_of_products_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("units_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("doc_id");
+
+                    b.HasIndex("types_of_products_id");
+
+                    b.HasIndex("units_id");
+
+                    b.ToTable("ReportProductPlan");
+                });
+
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProductPlan_id", b =>
+                {
+                    b.Property<string>("doc_id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("creation_date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("creator")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("doc_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("doc_id");
+
+                    b.ToTable("ReportProductPlan_id");
+                });
+
             modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportMatherialCosts", b =>
                 {
                     b.Property<int>("id")
@@ -217,12 +323,9 @@ namespace ASU_Degesta.Migrations
                     b.Property<double>("overhead_production_costs")
                         .HasColumnType("double");
 
-                    b.Property<string>("types_id")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("types_of_products_id")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("units_id")
                         .HasColumnType("int");
@@ -231,7 +334,7 @@ namespace ASU_Degesta.Migrations
 
                     b.HasIndex("doc_id");
 
-                    b.HasIndex("types_id");
+                    b.HasIndex("types_of_products_id");
 
                     b.HasIndex("units_id");
 
@@ -260,62 +363,6 @@ namespace ASU_Degesta.Migrations
                     b.ToTable("ReportMatherialCosts_id");
                 });
 
-            modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportProductPlan", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("doc_id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("produced")
-                        .HasColumnType("int");
-
-                    b.Property<string>("types_id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("types_of_products_id")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("units_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("doc_id");
-
-                    b.HasIndex("types_id");
-
-                    b.HasIndex("units_id");
-
-                    b.ToTable("ReportProductPlan");
-                });
-
-            modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportProductPlan_id", b =>
-                {
-                    b.Property<string>("doc_id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("creation_date")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("creator")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("doc_name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("doc_id");
-
-                    b.ToTable("ReportProductPlan_id");
-                });
-
             modelBuilder.Entity("ASU_Degesta.Models.SalesDepartment.SpecificationContractMaterials", b =>
                 {
                     b.Property<int>("id")
@@ -335,12 +382,9 @@ namespace ASU_Degesta.Migrations
                     b.Property<double>("price_per_unit")
                         .HasColumnType("double");
 
-                    b.Property<string>("types_id")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("types_of_products_id")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("units_id")
                         .HasColumnType("int");
@@ -349,7 +393,7 @@ namespace ASU_Degesta.Migrations
 
                     b.HasIndex("doc_id");
 
-                    b.HasIndex("types_id");
+                    b.HasIndex("types_of_products_id");
 
                     b.HasIndex("units_id");
 
@@ -521,6 +565,60 @@ namespace ASU_Degesta.Migrations
                     b.Navigation("payroll_statement_name_id");
                 });
 
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProductCost", b =>
+                {
+                    b.HasOne("ASU_Degesta.Models.PED.ReportProductCost_id", "ReportProductPlan_id")
+                        .WithMany()
+                        .HasForeignKey("doc_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
+                        .WithMany()
+                        .HasForeignKey("types_of_products_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.Units", "Units")
+                        .WithMany()
+                        .HasForeignKey("units_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReportProductPlan_id");
+
+                    b.Navigation("TypesOfProducts");
+
+                    b.Navigation("Units");
+                });
+
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProductPlan", b =>
+                {
+                    b.HasOne("ASU_Degesta.Models.PED.ReportProductPlan_id", "ReportProductPlan_id")
+                        .WithMany()
+                        .HasForeignKey("doc_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
+                        .WithMany()
+                        .HasForeignKey("types_of_products_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.Units", "Units")
+                        .WithMany()
+                        .HasForeignKey("units_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReportProductPlan_id");
+
+                    b.Navigation("TypesOfProducts");
+
+                    b.Navigation("Units");
+                });
+
             modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportMatherialCosts", b =>
                 {
                     b.HasOne("ASU_Degesta.Models.ProductionDepartment.ReportMatherialCosts_id", "ReportMatherialCosts_id")
@@ -531,7 +629,9 @@ namespace ASU_Degesta.Migrations
 
                     b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
                         .WithMany()
-                        .HasForeignKey("types_id");
+                        .HasForeignKey("types_of_products_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ASU_Degesta.Models.Handbooks.Units", "Units")
                         .WithMany()
@@ -540,31 +640,6 @@ namespace ASU_Degesta.Migrations
                         .IsRequired();
 
                     b.Navigation("ReportMatherialCosts_id");
-
-                    b.Navigation("TypesOfProducts");
-
-                    b.Navigation("Units");
-                });
-
-            modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportProductPlan", b =>
-                {
-                    b.HasOne("ASU_Degesta.Models.ProductionDepartment.ReportProductPlan_id", "ReportProductPlan_id")
-                        .WithMany()
-                        .HasForeignKey("doc_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
-                        .WithMany()
-                        .HasForeignKey("types_id");
-
-                    b.HasOne("ASU_Degesta.Models.Handbooks.Units", "Units")
-                        .WithMany()
-                        .HasForeignKey("units_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ReportProductPlan_id");
 
                     b.Navigation("TypesOfProducts");
 
@@ -581,7 +656,9 @@ namespace ASU_Degesta.Migrations
 
                     b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
                         .WithMany()
-                        .HasForeignKey("types_id");
+                        .HasForeignKey("types_of_products_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ASU_Degesta.Models.Handbooks.Units", "Units")
                         .WithMany()

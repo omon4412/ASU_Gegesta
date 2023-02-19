@@ -120,7 +120,7 @@ namespace ASU_Degesta.Areas.Identity.Pages.Account.Manage
 
             if (!is2faTokenValid)
             {
-                ModelState.AddModelError("Input.Code", "Verification code is invalid.");
+                ModelState.AddModelError("Input.Code", "Проверочный код недействителен.");
                 await LoadSharedKeyAndQrCodeUriAsync(user);
                 return Page();
             }
@@ -129,7 +129,7 @@ namespace ASU_Degesta.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             _logger.LogInformation("User with ID '{UserId}' has enabled 2FA with an authenticator app.", userId);
 
-            StatusMessage = "Your authenticator app has been verified.";
+            StatusMessage = "Ваше приложение-аутентификатор было проверено.";
 
             if (await _userManager.CountRecoveryCodesAsync(user) == 0)
             {
@@ -181,7 +181,7 @@ namespace ASU_Degesta.Areas.Identity.Pages.Account.Manage
             return string.Format(
                 CultureInfo.InvariantCulture,
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("Microsoft.AspNetCore.Identity.UI"),
+                _urlEncoder.Encode("ASU Degesta"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

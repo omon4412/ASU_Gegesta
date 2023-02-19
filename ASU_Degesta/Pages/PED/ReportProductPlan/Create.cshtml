@@ -1,0 +1,39 @@
+@page
+@model CreateModel
+
+@{
+    ViewData["Title"] = "Создать новый отчёт выполнения плана изделий в номенклатуре за месяц";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="ReportProductPlan_id.doc_id" class="form-control d-none" value="mg"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportProductPlan_id.doc_name" class="control-label"></label>
+                <input asp-for="ReportProductPlan_id.doc_name" class="form-control"/>
+                <span asp-validation-for="ReportProductPlan_id.doc_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="ReportProductPlan_id.creation_date" class="form-control d-none" value="mg"/>
+            </div>
+            <div class="form-group">
+                <input asp-for="ReportProductPlan_id.creator" class="form-control d-none" value="mg"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Вернуться к списку</a>
+</div>

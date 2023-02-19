@@ -38,7 +38,7 @@ namespace ASU_Degesta.Pages.ProductionDepartment.ReportMatherialCosts
             }
 
             ReportMatherialCosts =
-                await _context.ReportMatherialCosts.Where(x => String.Equals(x.doc_id, id)).ToListAsync();
+                await _context.ReportMatherialCosts.Where(x => String.Equals(x.doc_id, id)).OrderBy(x=>x.types_of_products_id).ToListAsync();
 
             return Page();
         }

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ASU_Degesta.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class LoginWith2faModel : PageModel
     {
         private readonly SignInManager<DegestaUser> _signInManager;

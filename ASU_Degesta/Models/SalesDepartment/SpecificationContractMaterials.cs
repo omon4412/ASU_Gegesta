@@ -14,7 +14,7 @@ namespace ASU_Degesta.Models.SalesDepartment
 
         [Display(Name = "Наименование")]
         public string types_of_products_id { get; set; }
-        [ForeignKey("types_id")]
+        [ForeignKey("types_of_products_id")]
         public TypesOfProducts? TypesOfProducts { get; set; }
 
         [Display(Name = "Количество")] public int count_of_matherials { get; set; }

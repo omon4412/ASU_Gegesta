@@ -13,7 +13,7 @@ public class ReportMatherialCosts
     public ReportMatherialCosts_id? ReportMatherialCosts_id { get; set; }
 
     [Display(Name = "Наименование")] public string types_of_products_id { get; set; }
-    [ForeignKey("types_id")]
+    [ForeignKey("types_of_products_id")]
     public TypesOfProducts? TypesOfProducts { get; set; }
 
     [Display(Name = "Прямые")] public double direct_costs { get; set; }

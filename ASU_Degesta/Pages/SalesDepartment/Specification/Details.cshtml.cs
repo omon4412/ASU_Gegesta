@@ -39,7 +39,7 @@ namespace ASU_Degesta.Pages.SalesDepartment.Specification
             }
 
             SpecificationContractMaterials = await _context.SpecificationContractMaterials
-                .Where(x => String.Equals(x.doc_id, id)).ToListAsync();
+                .Where(x => String.Equals(x.doc_id, id)).OrderBy(x=>x.types_of_products_id).ToListAsync();
 
             return Page();
         }

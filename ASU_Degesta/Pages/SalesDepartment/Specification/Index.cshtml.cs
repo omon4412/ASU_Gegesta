@@ -22,7 +22,7 @@ namespace ASU_Degesta.Pages.SalesDepartment.Specification
         {
             if (_context.SpecificationContractMaterials_id != null)
             {
-                SpecificationContractMaterials_id = await _context.SpecificationContractMaterials_id.ToListAsync();
+                SpecificationContractMaterials_id = await _context.SpecificationContractMaterials_id.OrderByDescending(x=>x.creation_date).ToListAsync();
             }
         }
     }

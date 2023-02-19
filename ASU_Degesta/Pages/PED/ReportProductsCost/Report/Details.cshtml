@@ -1,0 +1,36 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.reportProductCost.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.reportProductCost.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.reportProductCost.cost_price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.reportProductCost.cost_price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.reportProductCost.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.reportProductCost.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.reportProductCost.doc_id">Вернуться к списку</a>
+</div>

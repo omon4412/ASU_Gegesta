@@ -21,7 +21,7 @@ namespace ASU_Degesta.Pages.ProductionDepartment.ReportMatherialCosts
         {
             if (_context.ReportProductPlan_id != null)
             {
-                ReportMatherialCosts_id = await _context.ReportMatherialCosts_id.ToListAsync();
+                ReportMatherialCosts_id = await _context.ReportMatherialCosts_id.OrderByDescending(x=>x.creation_date).ToListAsync();
             }
         }
     }
