@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace ASU_Degesta.Pages.SalesDepartment.ForecastMaximumDemandProducts.Report
+namespace ASU_Degesta.Pages.SalesDepartment.PriceList.Report
 {
     [Authorize(Roles = "admin, Менеджер по продажам")]
     public class DeleteModel : PageModel
@@ -20,24 +20,24 @@ namespace ASU_Degesta.Pages.SalesDepartment.ForecastMaximumDemandProducts.Report
             UnitsList = _context.Units.AsNoTracking().ToList();
         }
 
-        [BindProperty] public Models.SalesDepartment.ForecastMaximumDemandProducts ForecastMaximumDemandProducts { get; set; } = default!;
+        [BindProperty] public Models.SalesDepartment.PriceList PriceList { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.ForecastMaximumDemandProducts == null)
+            if (id == null || _context.PriceList == null)
             {
                 return NotFound();
             }
 
-            var ForecastMaximumDemandProducts = await _context.ForecastMaximumDemandProducts.FirstOrDefaultAsync(m => m.id == id);
+            var PriceList = await _context.PriceList.FirstOrDefaultAsync(m => m.id == id);
 
-            if (ForecastMaximumDemandProducts == null)
+            if (PriceList == null)
             {
                 return NotFound();
             }
             else
             {
-                this.ForecastMaximumDemandProducts = ForecastMaximumDemandProducts;
+                this.PriceList = PriceList;
             }
 
             return Page();
@@ -45,22 +45,22 @@ namespace ASU_Degesta.Pages.SalesDepartment.ForecastMaximumDemandProducts.Report
 
         public async Task<IActionResult> OnPostAsync(string docid, int? id)
         {
-            if (id == null || docid == null || _context.ForecastMaximumDemandProducts == null)
+            if (id == null || docid == null || _context.PriceList == null)
             {
                 return NotFound();
             }
 
-            var ForecastMaximumDemandProducts = await _context.ForecastMaximumDemandProducts
+            var PriceList = await _context.PriceList
                 .FirstOrDefaultAsync(m => m.id == id && m.doc_id == docid);
 
-            if (ForecastMaximumDemandProducts != null)
+            if (PriceList != null)
             {
-                this.ForecastMaximumDemandProducts = ForecastMaximumDemandProducts;
-                _context.ForecastMaximumDemandProducts.Remove(ForecastMaximumDemandProducts);
+                this.PriceList = PriceList;
+                _context.PriceList.Remove(PriceList);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("../Details", new {id = ForecastMaximumDemandProducts.doc_id});
+            return RedirectToPage("../Details", new {id = PriceList.doc_id});
         }
     }
 }

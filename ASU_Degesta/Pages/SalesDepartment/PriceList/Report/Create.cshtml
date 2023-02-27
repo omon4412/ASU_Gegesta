@@ -1,0 +1,45 @@
+@page
+@using ASU_Degesta.Models.Handbooks
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CreateModel
+
+@{
+    ViewData["Title"] = "Создать новую запись";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="PriceList.doc_id" class="form-control d-none" value="@Model.idd"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceList.types_of_products_id" class="control-label"></label>
+                <select class="form-select" asp-for="PriceList.types_of_products_id" asp-items="@(new SelectList(Model.TypesOfProductsList, nameof(TypesOfProducts.TypesOfProductsId), nameof(TypesOfProducts.Name)))"></select>
+                <span asp-validation-for="PriceList.types_of_products_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceList.price" class="control-label"></label>
+                <input asp-for="PriceList.price" class="form-control"/>
+                <span asp-validation-for="PriceList.price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceList.units_id" class="control-label"></label>
+                <select class="form-select" asp-for="PriceList.units_id" asp-items="@(new SelectList(Model.UnitsList, nameof(Units.Units_ID), nameof(Units.Name)))"></select>
+                <span asp-validation-for="PriceList.units_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.idd">Вернуться к списку</a>
+</div>

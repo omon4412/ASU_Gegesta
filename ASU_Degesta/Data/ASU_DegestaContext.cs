@@ -68,4 +68,9 @@ public class ASU_DegestaContext : IdentityDbContext<DegestaUser>
         set;
     } =
         default!;
+    
+    public DbSet<ASU_Degesta.Models.SalesDepartment.PriceList> PriceList { get; set; } =
+        default!;
+    public DbSet<ASU_Degesta.Models.SalesDepartment.PriceList_id> PriceList_id { get; set; } =
+        default!;
 }

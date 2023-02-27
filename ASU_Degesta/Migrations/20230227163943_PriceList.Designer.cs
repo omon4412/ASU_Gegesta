@@ -3,6 +3,7 @@ using System;
 using ASU_Degesta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASU_Degesta.Migrations
 {
     [DbContext(typeof(ASU_DegestaContext))]
-    partial class ASU_DegestaContextModelSnapshot : ModelSnapshot
+    [Migration("20230227163943_PriceList")]
+    partial class PriceList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -422,12 +424,12 @@ namespace ASU_Degesta.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("demand")
+                        .HasColumnType("int");
+
                     b.Property<string>("doc_id")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("price")
-                        .HasColumnType("int");
 
                     b.Property<string>("types_of_products_id")
                         .IsRequired()

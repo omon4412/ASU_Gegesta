@@ -1,0 +1,38 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceList.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.PriceList.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceList.price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PriceList.price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceList.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.PriceList.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-docid="@Model.PriceList.doc_id" asp-route-id="@Model.PriceList?.id">Редактировать</a> |
+    <a asp-page="./Delete" asp-route-docid="@Model.PriceList.doc_id" asp-route-id="@Model.PriceList?.id">Удалить</a> |
+    <a asp-page="../Details" asp-route-id="@Model.PriceList.doc_id">Вернуться к списку</a>
+</div>

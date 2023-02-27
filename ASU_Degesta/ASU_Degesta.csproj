@@ -27,7 +27,6 @@
       <Folder Include="Pages\Classifier" />
       <Folder Include="Pages\Handbooks\TypesOfProducts" />
       <Folder Include="Pages\Handbooks\Units" />
-      <Folder Include="Pages\SalesDepartment\Pricelist" />
     </ItemGroup>
 
     <ItemGroup>

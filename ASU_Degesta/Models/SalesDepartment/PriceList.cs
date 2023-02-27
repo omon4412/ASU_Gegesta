@@ -16,7 +16,7 @@ public class PriceList
     [ForeignKey("types_of_products_id")]
     public TypesOfProducts? TypesOfProducts { get; set; }
 
-    [Display(Name = "Максимальный спрос")] public int demand { get; set; }
+    [Display(Name = "Стоимость")] public int price { get; set; }
 
     [Display(Name = "Единицы измерения")] public int units_id { get; set; }
     [ForeignKey("units_id")]

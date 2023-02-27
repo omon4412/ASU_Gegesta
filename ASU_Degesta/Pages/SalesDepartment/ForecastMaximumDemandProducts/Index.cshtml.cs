@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASU_Degesta.Pages.SalesDepartment.ForecastMaximumDemandProducts
 {
-    [Authorize(Roles = "admin, Начальник планово-экономического отдела")]
+    [Authorize(Roles = "admin, Менеджер по продажам")]
     public class IndexModel : PageModel
     {
         private readonly ASU_Degesta.Data.ASU_DegestaContext _context;
