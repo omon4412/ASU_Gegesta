@@ -1,0 +1,38 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ForecastMaximumDemandProducts.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.ForecastMaximumDemandProducts.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ForecastMaximumDemandProducts.demand)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ForecastMaximumDemandProducts.demand)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ForecastMaximumDemandProducts.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.ForecastMaximumDemandProducts.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-docid="@Model.ForecastMaximumDemandProducts.doc_id" asp-route-id="@Model.ForecastMaximumDemandProducts?.id">Редактировать</a> |
+    <a asp-page="./Delete" asp-route-docid="@Model.ForecastMaximumDemandProducts.doc_id" asp-route-id="@Model.ForecastMaximumDemandProducts?.id">Удалить</a> |
+    <a asp-page="../Details" asp-route-id="@Model.ForecastMaximumDemandProducts.doc_id">Вернуться к списку</a>
+</div>

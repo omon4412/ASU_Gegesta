@@ -54,4 +54,18 @@ public class ASU_DegestaContext : IdentityDbContext<DegestaUser>
 
     public DbSet<ASU_Degesta.Models.PED.ReportProductCost_id> ReportProductCost_id { get; set; } =
         default!;
+
+    public DbSet<ASU_Degesta.Models.SalesDepartment.ForecastMaximumDemandProducts> ForecastMaximumDemandProducts
+    {
+        get;
+        set;
+    } =
+        default!;
+
+    public DbSet<ASU_Degesta.Models.SalesDepartment.ForecastMaximumDemandProducts_id> ForecastMaximumDemandProducts_id
+    {
+        get;
+        set;
+    } =
+        default!;
 }
