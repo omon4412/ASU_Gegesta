@@ -2,7 +2,7 @@
 @model DeleteModel
 
 @{
-    ViewData["Title"] = "Удалить запись " + Model.ForecastMaximumDemandProducts_id.doc_name;
+    ViewData["Title"] = "Удалить запись " + Model.ReportAvailableEquipmentPerformance_id.doc_name;
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
@@ -13,27 +13,27 @@
     <hr/>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ForecastMaximumDemandProducts_id.doc_name)
+            @Html.DisplayNameFor(model => model.ReportAvailableEquipmentPerformance_id.doc_name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ForecastMaximumDemandProducts_id.doc_name)
+            @Html.DisplayFor(model => model.ReportAvailableEquipmentPerformance_id.doc_name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ForecastMaximumDemandProducts_id.creation_date)
+            @Html.DisplayNameFor(model => model.ReportAvailableEquipmentPerformance_id.creation_date)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ForecastMaximumDemandProducts_id.creation_date)
+            @Html.DisplayFor(model => model.ReportAvailableEquipmentPerformance_id.creation_date)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ForecastMaximumDemandProducts_id.creator)
+            @Html.DisplayNameFor(model => model.ReportAvailableEquipmentPerformance_id.creator)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ForecastMaximumDemandProducts_id.creator)
+            @Html.DisplayFor(model => model.ReportAvailableEquipmentPerformance_id.creator)
         </dd>
     </dl>
 
     <form method="post">
-        <input type="hidden" asp-for="ForecastMaximumDemandProducts_id.doc_id"/>
+        <input type="hidden" asp-for="ReportAvailableEquipmentPerformance_id.doc_id"/>
         <input type="submit" value="Удалить" class="btn btn-danger"/> |
         <a asp-page="./Index" class="btn btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">

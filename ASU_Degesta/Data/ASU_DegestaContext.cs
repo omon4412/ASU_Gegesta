@@ -17,9 +17,6 @@ public class ASU_DegestaContext : IdentityDbContext<DegestaUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
     }
 
     public DbSet<ASU_Degesta.Models.Handbooks.Units>? Units { get; set; }
@@ -68,9 +65,21 @@ public class ASU_DegestaContext : IdentityDbContext<DegestaUser>
         set;
     } =
         default!;
-    
+
     public DbSet<ASU_Degesta.Models.SalesDepartment.PriceList> PriceList { get; set; } =
         default!;
+
     public DbSet<ASU_Degesta.Models.SalesDepartment.PriceList_id> PriceList_id { get; set; } =
+        default!;
+
+    public DbSet<ASU_Degesta.Models.ProductionDepartment.ReportAvailableEquipmentPerformance>
+        ReportAvailableEquipmentPerformance { get; set; } =
+        default!;
+
+    public DbSet<ASU_Degesta.Models.ProductionDepartment.ReportAvailableEquipmentPerformance_id>
+        ReportAvailableEquipmentPerformance_id { get; set; } =
+        default!;
+    
+    public DbSet<ASU_Degesta.Models.ProductionDepartment.Equipments> Equipments { get; set; } =
         default!;
 }

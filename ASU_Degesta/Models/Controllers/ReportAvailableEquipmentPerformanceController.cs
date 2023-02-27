@@ -1,7 +1,6 @@
 ﻿using ASU_Degesta.Models.Handbooks;
 using ASU_Degesta.Models.PED;
 using ASU_Degesta.Models.ProductionDepartment;
-using ASU_Degesta.Models.SalesDepartment;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -10,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace ASU_Degesta.Models.Controllers;
 
 [ApiController]
-[Route("api/GetPriceListDocx")]
-public class PriceListDocxController : Controller
+[Route("api/GetReportAvailableEquipmentPerformanceDocx")]
+public class ReportAvailableEquipmentPerformanceController : Controller
 {
-    public ActionResult OnGet([FromBody] PriceListData data)
+    public ActionResult OnGet([FromBody] ReportAvailableEquipmentPerformanceData data)
     {
         var datas = data.Reports;
         var stream = new MemoryStream();
@@ -84,14 +83,14 @@ public class PriceListDocxController : Controller
 
             data_table.Add(new List<string>()
             {
-                "Наименование", "Стоимость", "Единицы измерения"
+                "Наименование", "Производительность", "Единицы измерения"
             });
             foreach (var item in datas)
             {
                 data_table.Add(new List<string>()
                 {
-                    data.TypesOfProductsList.Where(x=>x.TypesOfProductsId== item.types_of_products_id).FirstOrDefault().Name,
-                    item.price.ToString(), data.UnitsList.Where(x=>x.Units_ID == item.units_id).FirstOrDefault().Name
+                    data.EquipmentList.Where(x=>x.EquipmentId== item.EquipmentId).FirstOrDefault().EquipmentName,
+                    item.perfomance.ToString(), data.UnitsList.Where(x=>x.Units_ID == item.units_id).FirstOrDefault().Name
                 });
             }
 
@@ -117,7 +116,7 @@ public class PriceListDocxController : Controller
                 {"inside_horizontal", BorderValues.None},
                 {"inside_vertical", BorderValues.None},
             };
-            GetDocxClass.AddSignature(body, "Начальник отдела продаж:", 12, borders2, JustificationValues.Center);
+            GetDocxClass.AddSignature(body, "Начальник производственного отдела:", 12, borders2, JustificationValues.Center);
 
             body.Append(new Paragraph());
 
@@ -131,12 +130,12 @@ public class PriceListDocxController : Controller
         }
     }
 
-    public class PriceListData
+    public class ReportAvailableEquipmentPerformanceData
     {
-        public List<PriceList> Reports { get; set; }
-        public PriceList_id Report_ID { get; set; }
+        public List<ReportAvailableEquipmentPerformance> Reports { get; set; }
+        public ReportAvailableEquipmentPerformance_id Report_ID { get; set; }
 
         public List<Units> UnitsList { get; set; }
-        public List<TypesOfProducts> TypesOfProductsList { get; set; }
+        public List<Equipments> EquipmentList { get; set; }
     }
 }

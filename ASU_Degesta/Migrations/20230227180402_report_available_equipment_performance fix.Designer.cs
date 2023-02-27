@@ -3,6 +3,7 @@ using System;
 using ASU_Degesta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASU_Degesta.Migrations
 {
     [DbContext(typeof(ASU_DegestaContext))]
-    partial class ASU_DegestaContextModelSnapshot : ModelSnapshot
+    [Migration("20230227180402_report_available_equipment_performance fix")]
+    partial class report_available_equipment_performancefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,28 +306,10 @@ namespace ASU_Degesta.Migrations
                     b.ToTable("ReportProductPlan_id");
                 });
 
-            modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.Equipments", b =>
-                {
-                    b.Property<int>("EquipmentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("EquipmentName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("EquipmentId");
-
-                    b.ToTable("Equipments");
-                });
-
             modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportAvailableEquipmentPerformance", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("EquipmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("doc_id")
@@ -335,14 +319,18 @@ namespace ASU_Degesta.Migrations
                     b.Property<int>("perfomance")
                         .HasColumnType("int");
 
+                    b.Property<string>("types_of_products_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<int>("units_id")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("EquipmentId");
-
                     b.HasIndex("doc_id");
+
+                    b.HasIndex("types_of_products_id");
 
                     b.HasIndex("units_id");
 
@@ -794,15 +782,15 @@ namespace ASU_Degesta.Migrations
 
             modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.ReportAvailableEquipmentPerformance", b =>
                 {
-                    b.HasOne("ASU_Degesta.Models.ProductionDepartment.Equipments", "Equipments")
-                        .WithMany()
-                        .HasForeignKey("EquipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ASU_Degesta.Models.ProductionDepartment.ReportAvailableEquipmentPerformance_id", "ReportProductPlan_id")
                         .WithMany()
                         .HasForeignKey("doc_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
+                        .WithMany()
+                        .HasForeignKey("types_of_products_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -812,9 +800,9 @@ namespace ASU_Degesta.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Equipments");
-
                     b.Navigation("ReportProductPlan_id");
+
+                    b.Navigation("TypesOfProducts");
 
                     b.Navigation("Units");
                 });

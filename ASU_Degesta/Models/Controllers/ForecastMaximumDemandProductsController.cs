@@ -84,7 +84,7 @@ public class ForecastMaximumDemandProductsController : Controller
 
             data_table.Add(new List<string>()
             {
-                "Наименование", "Произведено", "Единицы измерения"
+                "Наименование", "Максимальный спрос", "Единицы измерения"
             });
             foreach (var item in datas)
             {

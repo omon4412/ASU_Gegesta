@@ -1,0 +1,38 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAvailableEquipmentPerformance.EquipmentId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.EquipmentsList.Where(x => x.EquipmentId == Model.ReportAvailableEquipmentPerformance.EquipmentId).FirstOrDefault().EquipmentName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAvailableEquipmentPerformance.perfomance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAvailableEquipmentPerformance.perfomance)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAvailableEquipmentPerformance.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.ReportAvailableEquipmentPerformance.units_id).FirstOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-docid="@Model.ReportAvailableEquipmentPerformance.doc_id" asp-route-id="@Model.ReportAvailableEquipmentPerformance?.id">Редактировать</a> |
+    <a asp-page="./Delete" asp-route-docid="@Model.ReportAvailableEquipmentPerformance.doc_id" asp-route-id="@Model.ReportAvailableEquipmentPerformance?.id">Удалить</a> |
+    <a asp-page="../Details" asp-route-id="@Model.ReportAvailableEquipmentPerformance.doc_id">Вернуться к списку</a>
+</div>
