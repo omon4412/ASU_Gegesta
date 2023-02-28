@@ -3,6 +3,7 @@ using System;
 using ASU_Degesta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASU_Degesta.Migrations
 {
     [DbContext(typeof(ASU_DegestaContext))]
-    partial class ASU_DegestaContextModelSnapshot : ModelSnapshot
+    [Migration("20230228134525_report_costs_production_capacity")]
+    partial class report_costs_production_capacity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -880,7 +882,7 @@ namespace ASU_Degesta.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ASU_Degesta.Models.ProductionDepartment.ReportCostsProductionCapacity_id", "ReportCostsProductionCapacity_id")
+                    b.HasOne("ASU_Degesta.Models.ProductionDepartment.ReportAvailableEquipmentPerformance_id", "ReportProductPlan_id")
                         .WithMany()
                         .HasForeignKey("doc_id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -894,7 +896,7 @@ namespace ASU_Degesta.Migrations
 
                     b.Navigation("Equipments");
 
-                    b.Navigation("ReportCostsProductionCapacity_id");
+                    b.Navigation("ReportProductPlan_id");
 
                     b.Navigation("TypesOfProducts");
                 });

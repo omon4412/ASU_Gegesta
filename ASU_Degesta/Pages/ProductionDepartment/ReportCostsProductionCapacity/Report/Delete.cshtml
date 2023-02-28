@@ -1,0 +1,40 @@
+@page
+@model DeleteModel
+
+@{
+    ViewData["Title"] = "Удалить запись";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportCostsProductionCapacity.EquipmentId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.EquipmentsList.Where(x => x.EquipmentId == Model.ReportCostsProductionCapacity.EquipmentId).FirstOrDefault().EquipmentName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportCostsProductionCapacity.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.ReportCostsProductionCapacity.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportCostsProductionCapacity.costs)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportCostsProductionCapacity.costs)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="ReportCostsProductionCapacity.id"/>
+        <input type="submit" value="Удалить" class="btn btn-danger"/> |
+        <a asp-page="../Details" asp-route-id="@Model.ReportCostsProductionCapacity.doc_id">Вернуться к списку</a>
+    </form>
+</div>

@@ -27,6 +27,7 @@
       <Folder Include="Pages\Classifier" />
       <Folder Include="Pages\Handbooks\TypesOfProducts" />
       <Folder Include="Pages\Handbooks\Units" />
+      <Folder Include="Pages\PED\MonthlyProductReleasePlan" />
     </ItemGroup>
 
     <ItemGroup>
@@ -43,6 +44,11 @@
       <AdditionalFiles Include="Pages\PED\ReportProductPlan\Report\Details.cshtml" />
       <AdditionalFiles Include="Pages\PED\ReportProductPlan\Report\Edit.cshtml" />
       <AdditionalFiles Include="Pages\PED\ReportProductPlan\Report\Index.cshtml" />
+      <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Create.cshtml" />
+      <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Delete.cshtml" />
+      <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Details.cshtml" />
+      <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Edit.cshtml" />
+      <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Index.cshtml" />
       <AdditionalFiles Include="Pages\ProductionDepartment\ReportMatherialCosts\Report\Create.cshtml" />
       <AdditionalFiles Include="Pages\ProductionDepartment\ReportMatherialCosts\Report\Delete.cshtml" />
       <AdditionalFiles Include="Pages\ProductionDepartment\ReportMatherialCosts\Report\Details.cshtml" />

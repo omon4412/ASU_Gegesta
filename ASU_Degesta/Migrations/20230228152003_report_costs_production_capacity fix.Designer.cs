@@ -3,6 +3,7 @@ using System;
 using ASU_Degesta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASU_Degesta.Migrations
 {
     [DbContext(typeof(ASU_DegestaContext))]
-    partial class ASU_DegestaContextModelSnapshot : ModelSnapshot
+    [Migration("20230228152003_report_costs_production_capacity fix")]
+    partial class report_costs_production_capacityfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
