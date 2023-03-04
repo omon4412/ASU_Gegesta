@@ -1,0 +1,51 @@
+﻿@startuml
+!define ABSTRACT {abstract}
+!define include <<include>>
+!define extend <<extend>>
+
+skinparam defaultTextAlignment center
+
+frame "Диаграмма прецедентов" {
+left to right direction
+
+:Пользователь\n ABSTRACT : as abstr
+:Сотрудник ПЭО: as employee
+:База данных: as bd
+
+employee -left-|> abstr
+
+rectangle "Программа" {
+    usecase data_write as "Запись данных
+    --
+    extension points:
+    Просмотр документа"
+    usecase (Чтение данных) as data_read
+    usecase (Авторизация) as autorization
+    usecase (Выбор документа) as choose
+    usecase (Формирование ежемесячного плана\n выпуска изделий в номенклатуре) as task1
+    usecase (Формирование отчёта сравнения плановых\n и фактических технико-экономических показателей) as task2
+    usecase (Формирование отчёта о себестоимости\n единицы продукции) as task3
+    usecase (Формирование отчёта о рентабельности\n за месяц) as task4
+    usecase (Просмотр полученного\n документа) as show_data
+    note "condition:\n{пользователь нажал\nна документ}\nextension point:\nПросмотр документа" as N2
+    
+    data_write .. N2
+    N2 .. show_data
+    abstr -- autorization
+    bd -r- data_read
+    bd -- data_write
+    autorization -.> data_read : include
+    employee -- choose 
+    choose -.> task1: include
+    choose -.> task2: include
+    choose -.> task3: include
+    choose -.> task4: include
+    task1 -.> data_write : include
+    task2 -.> data_write : include
+    task3 -.> data_write : include
+    task4 -.> data_write : include
+    show_data -u.> data_write : extend
+}
+}
+
+@enduml

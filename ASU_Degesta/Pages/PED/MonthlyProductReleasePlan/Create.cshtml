@@ -1,0 +1,66 @@
+@page
+@using ASU_Degesta.Models.SalesDepartment
+@using ASU_Degesta.Models.ProductionDepartment
+@using ASU_Degesta.Models.Accounting
+@using ASU_Degesta.Models.PED
+@model CreateModel
+
+@{
+    ViewData["Title"] = "Создать новый ежемесячный план выпуска изделий в номенклатуре (в натуральных единицах измерения)";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="MonthlyProductReleasePlan_id.doc_id" class="form-control d-none" value="mg"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="MonthlyProductReleasePlan_id.doc_name" class="control-label"></label>
+                <input asp-for="MonthlyProductReleasePlan_id.doc_name" class="form-control"/>
+                <span asp-validation-for="MonthlyProductReleasePlan_id.doc_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Forecast_id" class="control-label"></label>
+                <select class="form-select" asp-for="@Model.Forecast_id" asp-items="@(new SelectList(Model.Forecast, nameof(ForecastMaximumDemandProducts_id.doc_id), nameof(ForecastMaximumDemandProducts_id.doc_name)))"></select>
+                <span asp-validation-for="@Model.Forecast_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Price_id" class="control-label"></label>
+                <select class="form-select" asp-for="@Model.Price_id" asp-items="@(new SelectList(Model.Price, nameof(PriceList_id.doc_id), nameof(PriceList_id.doc_name)))"></select>
+                <span asp-validation-for="@Model.Price_id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.ReportCosts_id" class="control-label"></label>
+                <select class="form-select" asp-for="@Model.ReportCosts_id" asp-items="@(new SelectList(Model.ReportCost, nameof(ReportCostsProductionCapacity_id.doc_id), nameof(ReportCostsProductionCapacity_id.doc_name)))"></select>
+                <span asp-validation-for="@Model.ReportCosts_id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.ReportAvailable_id" class="control-label"></label>
+                <select class="form-select" asp-for="@Model.ReportAvailable_id" asp-items="@(new SelectList(Model.ReportAvailable, nameof(ReportAvailableEquipmentPerformance_id.doc_id), nameof(ReportAvailableEquipmentPerformance_id.doc_name)))"></select>
+                <span asp-validation-for="@Model.ReportAvailable_id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="MonthlyProductReleasePlan_id.creation_date" class="form-control d-none" value="mg"/>
+            </div>
+            <div class="form-group">
+                <input asp-for="MonthlyProductReleasePlan_id.creator" class="form-control d-none" value="mg"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Вернуться к списку</a>
+</div>

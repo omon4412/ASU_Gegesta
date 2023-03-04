@@ -32,26 +32,25 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ReportProductCost[0].types_of_products_id)
+            @Html.DisplayNameFor(model => model.MonthlyProductReleasePlan[0].types_of_products_id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReportProductCost[0].cost_price)
-        </th>
+        @Html.DisplayNameFor(model => model.MonthlyProductReleasePlan[0].count)
         <th>
-            @Html.DisplayNameFor(model => model.ReportProductCost[0].units_id)
+            @Html.DisplayNameFor(model => model.MonthlyProductReleasePlan[0].units_id)
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.ReportProductCost)
+    @foreach (var item in Model.MonthlyProductReleasePlan)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == item.types_of_products_id).FirstOrDefault().Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cost_price)
+                @Html.DisplayFor(modelItem => item.count)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == item.units_id).FirstOrDefault().Name)
@@ -76,7 +75,7 @@
     function GetDocx() {
         let data = {};
         data['Report_ID'] = JSON.parse('@Json.Serialize(Model.info[0])');
-        data['Reports'] = JSON.parse('@Json.Serialize(Model.ReportProductCost)');
+        data['Reports'] = JSON.parse('@Json.Serialize(Model.MonthlyProductReleasePlan)');
         data['TypesOfProductsList'] = JSON.parse('@Json.Serialize(Model.TypesOfProductsList)');
         data['UnitsList'] = JSON.parse('@Json.Serialize(Model.UnitsList)');
         let info = {};
@@ -84,7 +83,7 @@
         info['file_id'] = '@Model.info[0].doc_id';
         //data['PayrollStatements'] = null;
         //data['file_id'] = 
-        GetFile('GetReportProductCostDocx', data, info);
+        GetFile('GetMonthlyProductReleasePlanDocx', data, info);
         }
                 
     </script>

@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="DocumentFormat.OpenXml" Version="2.19.0" />
+	  <PackageReference Include="Google.OrTools" Version="9.5.2237" />
       <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.12" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.12" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.12" />
@@ -27,7 +28,6 @@
       <Folder Include="Pages\Classifier" />
       <Folder Include="Pages\Handbooks\TypesOfProducts" />
       <Folder Include="Pages\Handbooks\Units" />
-      <Folder Include="Pages\PED\MonthlyProductReleasePlan" />
     </ItemGroup>
 
     <ItemGroup>

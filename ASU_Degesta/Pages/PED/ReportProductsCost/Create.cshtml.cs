@@ -83,22 +83,25 @@ namespace ASU_Degesta.Pages.PED.ReportProductsCost
             {
                 name = x.t_p.t_p.t_p.TypesOfProductsId,
                 sum = Math.Round((x.t_p.t_p.spec.price_per_unit +
-                                 Math.Round(
-                                     x.t_p.mc.overhead_production_costs + x.t_p.mc.general_business_invoices +
-                                     x.t_p.mc.direct_costs, 2))
-                                 * x.pl_mth.produced + (pay.Sum(t => t.total_accrued) / x.pl_mth.produced), 2),
+                                  Math.Round(
+                                      x.t_p.mc.overhead_production_costs + x.t_p.mc.general_business_invoices +
+                                      x.t_p.mc.direct_costs, 2))
+                    * x.pl_mth.produced + (pay.Sum(t => t.total_accrued) / x.pl_mth.produced), 2),
                 unit = x.t_p.t_p.spec.units_id
             });
 
             foreach (var item in test)
             {
-                ReportProductCost what = new ReportProductCost();
-                what.doc_id = ReportProductCost_id.doc_id;
-                what.types_of_products_id = item.name;
-                what.cost_price = item.sum;
-                what.units_id = item.unit;
+                ReportProductCost what = new ReportProductCost
+                {
+                    doc_id = ReportProductCost_id.doc_id,
+                    types_of_products_id = item.name,
+                    cost_price = item.sum,
+                    units_id = item.unit
+                };
                 _context.ReportProductCost.Add(what);
             }
+
             await _context.SaveChangesAsync();
             // var resr = spec.Join(types_of_products,
             //     spec => spec.types_of_products_id,
