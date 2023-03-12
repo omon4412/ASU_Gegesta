@@ -1,0 +1,138 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+!define interface1 <<interface>>
+!define entity <<entity>>
+!define control <<control>>
+
+
+class ASU_DegestaContext entity{
+    + ForecastMaximumDemandProducts : DbSet<ForecastMaximumDemandProducts> 
+    + PriceList : DbSet<PriceList>
+    + ReportAvailableEquipmentPerformance : DbSet<ReportAvailableEquipmentPerformance>
+    + ReportCostsProductionCapacity : DbSet<ReportCostsProductionCapacity>
+    + MonthlyProductReleasePlan : DbSet<MonthlyProductReleasePlan> 
+}
+
+class ForecastMaximumDemandProducts entity{
+   + id : int
+   + doc_id : string
+   + types_of_products_id : string 
+   + demand : int 
+   + units_id : int 
+}
+
+class PriceList entity{
+    + id : int 
+    + doc_id : string 
+    + types_of_products_id : string  
+    + price : int 
+    + units_id : int 
+}
+
+class ReportAvailableEquipmentPerformance entity{
+    + id : int 
+    + doc_id : string 
+    + EquipmentId : int 
+    + perfomance : int 
+    + units_id : int 
+}
+
+class ReportCostsProductionCapacity entity{
+    + id : int 
+    + doc_id : string 
+    + EquipmentId : int 
+    + types_of_products_id : string 
+    + costs : int 
+}
+
+class MonthlyProductReleasePlan entity{
+    + id : int
+    + doc_id : string 
+    + types_of_products_id : string    
+    + count : double 
+    + units_id : int 
+}
+
+ForecastMaximumDemandProducts .-> ASU_DegestaContext
+PriceList .-> ASU_DegestaContext
+ReportAvailableEquipmentPerformance .-> ASU_DegestaContext
+ReportCostsProductionCapacity .-> ASU_DegestaContext
+
+interface IController interface1 {
+    + View()
+    + PartialView()
+    + ViewComponent(in componentName : string)
+    + Json(in data : object) : JsonResult
+}
+
+class SolveController control{
+    + OnPost(in data : JsonResult) : JsonResult
+}
+
+SolveController .-|> IController
+
+class CreateController control{
+    - _context : ASU_DegestaContext {readOnly} 
+    - _userManager : SignInManager<DegestaUser> {readOnly}
+    + InputModel Input
+    + Forecast : List<ForecastMaximumDemandProducts_id>
+    + Price : List<PriceList_id> 
+    + ReportCost : List<ReportCostsProductionCapacity_id> 
+    + ReportAvailable : List<ReportAvailableEquipmentPerformance_id> 
+}
+
+MonthlyProductReleasePlan -.> CreateController
+CreateController <.- ASU_DegestaContext
+'CreateController -- SolveController
+
+class types_of_products entity{
+    + types_of_products_id : int 
+    + code : string 
+    + Name : string 
+}
+
+types_of_products --o ForecastMaximumDemandProducts
+types_of_products --o PriceList
+types_of_products --o ReportCostsProductionCapacity
+types_of_products --o MonthlyProductReleasePlan
+
+class Units entity{
+    + Units_ID : int 
+    + Name : string 
+}
+
+Units --o ForecastMaximumDemandProducts
+Units --o PriceList
+Units --o ReportCostsProductionCapacity
+Units --o MonthlyProductReleasePlan
+Units --o ReportAvailableEquipmentPerformance
+
+class DegestaUser entity{
+    + Name : string 
+    + Job : string 
+}
+class IdentityUser entity{
+    + Id : string
+    + UserName : string 
+    + NormalizedUserName : string
+    + Email : string 
+    + NormalizedEmail : string 
+    + EmailConfirmed : bool 
+    + PasswordHash : string 
+    + TwoFactorEnabled : bool 
+    + ToString() : string
+}
+
+DegestaUser .-|> IdentityUser
+
+class LoginController control{
+    - _user : DegestaUser
+    -  _signInManager : SignInManager<DegestaUser> {readOnly}
+    + InputModel Input
+    + OnGetAsync() : Task
+    + OnPostAsync() : Task<IActionResult>
+}
+DegestaUser -.> LoginController
+'LoginController -.> ASU_DegestaContext
+
+@enduml

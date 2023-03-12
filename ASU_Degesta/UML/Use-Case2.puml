@@ -1,0 +1,83 @@
+﻿@startuml
+!define ABSTRACT {abstract}
+!define include <<include>>
+!define extend <<extend>>
+
+skinparam defaultTextAlignment center
+
+frame "Диаграмма прецедентов" {
+left to right direction
+
+:Пользователь\n ABSTRACT : as abstr
+:Сотрудник ПЭО: as employee
+:База данных: as bd
+
+employee -left-|> abstr
+
+rectangle "Программа" {
+    usecase data_write as "Запись данных
+    --
+    extension points:
+    Просмотр документа"
+    usecase (Чтение данных) as data_read
+    usecase (Авторизация) as autorization
+    usecase (Выбор документа) as choose
+    usecase (Формирование ежемесячного плана\n выпуска изделий в номенклатуре) as task1
+    usecase (Формирование отчёта сравнения плановых\n и фактических технико-экономических показателей) as task2
+    usecase (Формирование отчёта о себестоимости\n единицы продукции) as task3
+    usecase (Формирование отчёта о рентабельности\n за месяц) as task4
+    usecase (Просмотр полученного\n документа) as show_data
+    note "condition:\n{пользователь нажал\nна документ}\nextension point:\nПросмотр документа" as N2
+    
+    usecase (Получение докуменов типа \n«Прогноз на максимальную потребность\n в изделиях на месяц» и помещение их\n названий в селектор выбора) as one_doc
+    usecase (Получение докуменов типа \n«Прайс-лист» и помещение их\n названий в селектор выбора) as two_doc
+    usecase (Получение докуменов типа \n«Отчёт о издержках производственных мощностей\n на производство каждого изделия» и\n помещение их названий в селектор выбора) as tree_doc
+    usecase (Получение докуменов типа \n«Отчёт о имеющихся производственных \nмощностях на месяц» и помещение \nих названий в селектор выбора) as foth_doc
+    usecase (Выбор нужных документов) as select
+     'usecase (Наж) as button
+    usecase validation as  "Вылидация данных
+    --
+    extension points:
+    Вывод сообщения об ошибке"
+    usecase (Расчёт) as solve
+    usecase (Вывод сообщения об ошибке) as notvalid
+     note "condition:\n{валидация не прошла}\nextension point:\nВывод сообщения об ошибке" as N3
+    
+    data_write .. N2
+    N2 .. show_data
+    abstr -- autorization
+    bd -r- data_read
+    bd -- data_write
+    autorization -.> data_read : include
+    employee -- choose 
+    choose -.> task1: include
+    choose -.> task2: include
+    choose -.> task3: include
+    choose -.> task4: include
+    'task1 -.> data_write : include
+    task2 -.> data_write : include
+    task3 -.> data_write : include
+    task4 -.> data_write : include
+    show_data -u.> data_write : extend
+    
+    task1 -.> one_doc : include
+    task1 -.> two_doc : include
+    task1 -.> tree_doc : include
+    task1 -.> foth_doc : include
+    
+    one_doc -.> select : include
+    two_doc -.> select : include
+    tree_doc -.> select : include
+    foth_doc -.> select : include
+    employee -- select
+    
+    select -.> validation : include
+    validation -.> solve : include
+    solve .> data_write : include
+    notvalid -u.> validation : extend
+    notvalid .. N3
+    N3 .. validation
+}
+}
+
+@enduml

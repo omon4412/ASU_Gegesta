@@ -1,0 +1,78 @@
+﻿@startuml
+'https://plantuml.com/deployment-diagram
+left to right direction
+'label label
+'package "База данных" as bd{
+'entity aspnetusers
+'entity MonthlyProductReleasePlan as main
+'entity ForecastMaximumDemandProducts as doc1
+'entity PriceList as doc2
+'entity ReportCostsProductionCapacity as doc3
+'entity ReportAvailableEquipmentPerformance as doc4
+
+'doc1 --o main
+'doc2 --o main
+'doc3 --o main
+'doc4 --o main
+
+'}
+'package "ПО"{
+
+entity ASU_DegestaContext as context
+control SolveController as SC
+interface IController as IC
+package ASU_Degesta.Models{
+
+entity ForecastMaximumDemandProducts as doc1M
+entity PriceList as doc2M
+entity ReportCostsProductionCapacity as doc3M
+entity ReportAvailableEquipmentPerformance as doc4M
+
+}
+package ASU_Degesta.Identity{
+'boundary LoginPage
+control LoginController
+entity DegestaUser as User
+entity IdentityUser as IUser
+'LoginPage -- LoginController
+User -- LoginController
+User -.|> IUser
+}
+package ASU_Degesta.Models.Handbooks{
+    entity types_of_products
+    entity Units
+}
+types_of_products --o doc1M
+types_of_products --o doc2M
+types_of_products --o doc3M
+
+Units --o doc1M
+Units --o doc2M
+Units --o doc3M
+Units --o doc4M
+
+package ASU_Degesta.Pages.PED{
+'boundary CreateModel
+control CreateController
+entity MonthlyProductReleasePlan as mainM
+
+types_of_products --o mainM
+Units --o mainM
+CreateController <.- context
+'LoginController -.> context
+doc1M -.> context
+doc2M -.> context
+doc3M -.> context
+doc4M -.> context
+mainM -.> CreateController
+'CreateModel -- CreateController
+'CreateController - SC
+SC -.|> IC  
+}
+
+
+
+'}
+'context -.> bd
+
+@enduml

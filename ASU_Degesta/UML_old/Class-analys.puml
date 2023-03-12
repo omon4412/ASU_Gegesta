@@ -1,0 +1,58 @@
+﻿@startuml
+'https://plantuml.com/deployment-diagram
+
+'label label
+
+package "База данных" as bd{
+entity aspnetusers
+entity MonthlyProductReleasePlan as main
+entity ForecastMaximumDemandProducts as doc1
+entity PriceList as doc2
+entity ReportCostsProductionCapacity as doc3
+entity ReportAvailableEquipmentPerformance as doc4
+
+doc1 --o main
+doc2 --o main
+doc3 --o main
+doc4 --o main
+
+}
+package "ПО"{
+
+entity ASU_DegestaContext as context
+package ASU_Degesta.Models{
+
+entity ForecastMaximumDemandProducts as doc1M
+entity PriceList as doc2M
+entity ReportCostsProductionCapacity as doc3M
+entity ReportAvailableEquipmentPerformance as doc4M
+
+}
+package ASU_Degesta.Identity{
+boundary LoginPage
+control LoginController
+entity DegestaUser as User
+interface IdentityUser as IUser
+LoginPage -- LoginController
+User -- LoginController
+User -.|> IUser
+}
+package ASU_Degesta.Pages.PED{
+boundary CreateModel
+control CreateController
+entity MonthlyProductReleasePlan as mainM
+CreateController -.> context
+LoginController -.> context
+doc1M -.> context
+doc2M -.> context
+doc3M -.> context
+doc4M -.> context
+mainM -- CreateController
+CreateModel -- CreateController
+
+}
+
+}
+context -.> bd
+
+@enduml

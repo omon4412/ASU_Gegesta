@@ -68,8 +68,6 @@ namespace ASU_Degesta.Pages.PED.MonthlyProductReleasePlan
                 return Page();
             }
 
-            
-
             ///Task
             var fore = _context.ForecastMaximumDemandProducts
                 .Where(x => x.doc_id == Forecast_id).ToList();

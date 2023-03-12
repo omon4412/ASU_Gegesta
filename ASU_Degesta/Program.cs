@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using ASU_Degesta.Data;
 using ASU_Degesta.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ASU_DegestaContextConnection") ?? throw new InvalidOperationException("Connection string 'ASU_DegestaContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("ASU_DegestaContextConnection") ??
+                       throw new InvalidOperationException(
+                           "Connection string 'ASU_DegestaContextConnection' not found.");
 
 builder.Services.AddDbContext<ASU_DegestaContext>(options =>
     options.UseMySQL(connectionString));
@@ -23,7 +24,8 @@ builder.Services.AddDefaultIdentity<DegestaUser>(
 
 builder.Services.Configure<SecurityStampValidatorOptions>(o => o.ValidationInterval = TimeSpan.FromSeconds(10));
 
-builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));
+builder.Services.AddSingleton(
+    HtmlEncoder.Create(allowedRanges: new[] {UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic}));
 
 // using (var scope = app.Services.CreateScope())
 // {
@@ -67,13 +69,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication();
+;
 
 app.UseAuthorization();
 
 //app.MapRazorPages();
 
-app.UseEndpoints(endpoints => {
+app.UseEndpoints(endpoints =>
+{
     endpoints.MapRazorPages();
     //endpoints.MapControllerRoute("default", "api/{controller=Home}/{action=Index}/{id?}");
     endpoints.MapControllers();
