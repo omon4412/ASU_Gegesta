@@ -64,6 +64,17 @@ public class PayrollStatemetsController : Controller
 
             doc.MainDocumentPart.Document.Body.Append(sectionProperties);
             
+            Dictionary<string, BorderValues> borders3 = new Dictionary<string, BorderValues>
+            {
+                {"top", BorderValues.None},
+                {"bottom", BorderValues.Single},
+                {"left", BorderValues.None},
+                {"right", BorderValues.None},
+                {"inside_horizontal", BorderValues.None},
+                {"inside_vertical", BorderValues.None},
+            };
+            GetDocxClass.AddHeader(body,  "Бухгалтерия",12, borders3, JustificationValues.Right);
+            
             body.Append(new Paragraph(new ParagraphProperties(
                     new Justification() {Val = JustificationValues.Center}),
                 new Run(rp32,

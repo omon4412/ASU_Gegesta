@@ -5,6 +5,64 @@ namespace ASU_Degesta.Models;
 
 public static class GetDocxClass
 {
+     public static void AddHeader(Body body, string department, int fontSize,
+        Dictionary<string, BorderValues> borders, JustificationValues justificationValues,
+        bool headerBold = false)
+    {
+        Table table1 = new Table();
+
+        TableProperties props = new TableProperties();
+
+        TableCellVerticalAlignment tcVA = new TableCellVerticalAlignment() {Val = TableVerticalAlignmentValues.Center};
+        
+        var tableWidth = new TableWidth() {Width = "5200", Type = TableWidthUnitValues.Pct};
+        TableLayout tl = new TableLayout() {Type = TableLayoutValues.Autofit};
+
+        props.TableLayout = tl;
+
+        props.Append(tableWidth);
+        props.Append(tcVA);
+        table1.AppendChild<TableProperties>(props);
+        var data1 = new List<List<string>>()
+        {
+            new() {"ООО “Дежеста”"},
+            new() {department},
+        };
+
+        for (var i = 0; i < 2; i++)
+        {
+            var tr1 = new TableRow();
+            for (var j = 0; j < 1; j++)
+            {
+                var rp = new RunProperties()
+                {
+                    FontSize = new FontSize()
+                    {
+                        Val = new StringValue((fontSize * 2).ToString()),
+                    },
+                    //Bold = headerBold == true && i == 0 ? new Bold() : null,
+                    RunFonts = new RunFonts()
+                    {
+                        Ascii = "Times New Roman",
+                        HighAnsi = "Times New Roman"
+                    }
+                };
+                var tc = new TableCell();
+                tc.Append(new Paragraph(new ParagraphProperties(
+                        new Justification() {Val = justificationValues}),
+                    new Run(rp, new Text(data1[i][j]))));
+
+                tc.Append(new TableCellProperties(
+                    new TableCellWidth
+                        {Width = i == 0 && j == 0 || i == 1 && j == 0 ? "1" : "0", Type = TableWidthUnitValues.Auto}));
+                tr1.Append(tc);
+            }
+
+            table1.Append(tr1);
+        }
+
+        body.Append(table1);
+    }
     public static void AddSignature(Body body, string position, int fontSize,
         Dictionary<string, BorderValues> borders, JustificationValues justificationValues,
         bool headerBold = false)

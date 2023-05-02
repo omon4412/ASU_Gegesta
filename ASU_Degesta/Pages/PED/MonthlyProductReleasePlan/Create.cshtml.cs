@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Data.Common;
 using System.Text;
 using ASU_Degesta.Models;
 using ASU_Degesta.Models.Handbooks;
@@ -8,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -47,13 +50,21 @@ namespace ASU_Degesta.Pages.PED.MonthlyProductReleasePlan
 
         [BindProperty] public MonthlyProductReleasePlan_id MonthlyProductReleasePlan_id { get; set; } = default!;
 
-        [BindProperty] public string Forecast_id { get; set; } = default!;
+        [BindProperty] 
+        [DisplayName("Прогноз на максимальную потребность в изделиях на месяц")]
+        public string Forecast_id { get; set; } = default!;
 
-        [BindProperty] public string Price_id { get; set; } = default!;
+        [BindProperty] 
+        [DisplayName("Прайс-лист")]
+        public string Price_id { get; set; } = default!;
 
-        [BindProperty] public string ReportCosts_id { get; set; } = default!;
+        [BindProperty] 
+        [DisplayName("Отчёт о издержках производственных мощностей на производство каждого изделия")]
+        public string ReportCosts_id { get; set; } = default!;
 
-        [BindProperty] public string ReportAvailable_id { get; set; } = default!;
+        [BindProperty] 
+        [DisplayName("Отчёт о имеющихся производственных мощностях на месяц")]
+        public string ReportAvailable_id { get; set; } = default!;
 
 
         public async Task<IActionResult> OnPostAsync()
@@ -87,7 +98,8 @@ namespace ASU_Degesta.Pages.PED.MonthlyProductReleasePlan
                 rep => rep.types_of_products_id,
                 (t_p, rep) => new {t_p, rep}).Join(repava, x => x.rep.EquipmentId, y => y.EquipmentId,
                 (x, y) => new {x, y}).OrderBy(x => x.x.rep.EquipmentId).ToList();
-
+            
+            
             for (int i = 0; i < repava.Count; i++)
             {
                 data.Add(joinData.Take(fore.Count).Select(x => x.x.rep.costs).ToList());

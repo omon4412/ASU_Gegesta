@@ -54,20 +54,22 @@ Units --o doc4M
 package ASU_Degesta.Pages.PED{
 'boundary CreateModel
 control CreateController
+
 entity MonthlyProductReleasePlan as mainM
 
 types_of_products --o mainM
 Units --o mainM
-CreateController <.- context
+CreateController -- context
 'LoginController -.> context
 doc1M -.> context
 doc2M -.> context
 doc3M -.> context
 doc4M -.> context
-mainM -.> CreateController
+mainM -.> context
 'CreateModel -- CreateController
 'CreateController - SC
 SC -.|> IC  
+SC -- CreateController
 }
 
 

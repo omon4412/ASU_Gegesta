@@ -22,7 +22,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="ReportProductCost_id.doc_name" class="control-label"></label>
-                <input asp-for="ReportProductCost_id.doc_name" class="form-control"/>
+                
+                <div class="input-group mb-3">
+                    <input id="paste" asp-for="ReportProductCost_id.doc_name" class="form-control"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onclick="pasteName('Отчёт о себестоимости единицы продукции')">Вставить</button>
+                    </div>
+                </div>
                 <span asp-validation-for="ReportProductCost_id.doc_name" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -149,3 +149,7 @@ function checkCookies(){
     })
 }
 checkCookies();
+    function pasteName(text){
+    var elem = document.getElementById("paste");
+    elem.value = text;
+}

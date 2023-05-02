@@ -1,0 +1,63 @@
+﻿@startuml
+'https://plantuml.com/deployment-diagram
+left to right direction
+
+frame "Deployment Diagram"{
+node "Client device" <<device>> as client{
+    node "Operation system" <<executing environment>> as os{
+        component WebBrowser
+    }
+}
+
+node "Server" <<device>> as server{
+     node "Windows Server" <<executing environment>> as servOS{
+            node "HTTPS Server" <<executing environment>> as http{
+                port 443
+            }
+            
+             node "WebLogic Server" <<executing environment>> as weblogic{
+                  artifact "Program" <<artifact>>  as exe         
+             }
+        }
+}
+
+
+
+node Server <<device>> as db_serv{
+node "Ubuntu Server" <<executing environment>>{
+node "DBMS MySQL Server\n\n\n\n" <<device>> as bd_serv{
+    database MySQL <<database>> as musql
+    artifact MySQL <<artifact>> as mys{
+    }
+    port 3306
+}
+musql .u.> mys
+
+}
+}
+
+component  "DBMS MySQL Server 8" as mm
+
+mys ..> mm : <<manifest>>
+
+node Internet as internet{
+
+}
+
+'client -- server
+'server -- bd_serv
+http -r- weblogic
+WebBrowser -.> 443 : "HTTPS Request"
+weblogic-.>3306 : "Data Request"
+
+internet -u- server
+internet -- client
+internet -- db_serv
+
+component "Program.exe" as serv_part
+
+serv_part <.- exe : <<manifest>>
+
+}
+
+@enduml

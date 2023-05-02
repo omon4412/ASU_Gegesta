@@ -1,17 +1,137 @@
 ﻿@startuml
-participant Participant as Foo
-actor       Actor       as Foo1
-boundary    Boundary    as Foo2
-control     Control     as Foo3
-entity      Entity      as Foo4
-database    Database    as Foo5
-collections Collections as Foo6
-queue       Queue       as Foo7
-Foo -> Foo1 : To actor 
-Foo -> Foo2 : To boundary
-Foo -> Foo3 : To control
-Foo -> Foo4 : To entity
-Foo -> Foo5 : To database
-Foo -> Foo6 : To collections
-Foo -> Foo7 : To queue
-@enduml
+
+mainframe sd Диаграмма последовательности
+
+actor       "Пользователь"       as abstr
+
+actor       "Сотрудник ПЭО"       as user
+boundary    "Страница авторизации"    as auth_page
+control     LoginController as lc
+'entity     DegestaUser     as degus
+
+boundary    "Страница задачи"    as main_page
+control CreateController as cc
+control SolveController as sc
+entity      ASU_DegestaContext      as context
+database    "DBMS MySql"    as db
+
+
+abstr -> auth_page : Открыть сайт
+activate abstr
+activate auth_page
+auth_page -> lc : Get() - запрос на отображение
+activate lc 
+lc --> auth_page : View() страницы
+deactivate lc 
+auth_page --> abstr : Страница отображена
+
+abstr -> auth_page : Вводит данные для входа
+activate lc 
+auth_page -> lc : Отправляет логин и пароль
+
+lc -> db : Отпраляет логин и хеш пароля
+activate db 
+db -> db : Обработка данных
+
+alt Данные верны
+    db --> lc : Пользователь найден
+    
+    
+    lc --> auth_page : Успешный вход
+    auth_page -> auth_page : Переход  
+    auth_page --> abstr : Сообщение об успешном входе
+    
+else Данные неверны
+    db --> lc : Пользователь не найден
+     
+    deactivate db
+    lc --> auth_page : Ошибка входа
+        deactivate lc
+    auth_page -> auth_page : Переход 
+
+    auth_page --> abstr : Сообщение об ошибке
+    deactivate auth_page
+    deactivate abstr
+end   
+
+user -> main_page : Выбор задачи "Формирование ежемесячного плана\n выпуска изделий в номенклатуре"
+activate user
+activate main_page
+main_page -> cc : Get() - запрос на отображение
+activate cc
+cc --> main_page : View() страницы
+deactivate cc
+main_page --> user : Страница отображена
+
+user -> main_page : Нажимает кнопку "Создать новый документ"
+main_page -> cc : Получить список названий документов
+activate cc
+cc -> context : Получить список названий документов
+activate context
+
+context -> db : Запросить список названий документов
+activate db
+db -> db : Обработка данных
+db --> context : Список названий документов
+deactivate db
+context --> cc : Список названий документов
+deactivate context
+cc --> main_page : Список названий документов
+deactivate cc
+main_page -> main_page : Переход
+main_page --> user : Страница отображена
+
+user -> main_page : Выбирает документы и нажимает кнопку "Создать"
+main_page -> cc : Обработать документы
+activate cc
+cc -> context : Получить документы
+activate context
+context -> db : Запросить данных документов
+activate db
+db -> db : Обработка данных
+db --> context : Данные документов
+deactivate db
+context --> cc
+cc -> cc : Валидация данных
+alt Валидация пройдена
+    cc -> sc : Сделать расчёт
+    activate sc
+    sc -> sc : Расчёт
+    sc --> cc : Вернуть результат
+    deactivate sc
+    cc -> context : Записать данные
+    context -> db : Внести данные в таблицу
+    activate db
+    db -> db : Обработка данных
+    db --> context : Данные внесены
+    deactivate db
+    context --> cc
+    deactivate context
+    cc --> main_page
+    main_page --> user : Отобразить страницу
+        
+else Валидация непройдена
+    cc --> main_page : Ошибка валидации
+    deactivate cc
+    main_page --> user : Ошибка валидации
+    deactivate main_page
+end   
+    
+    user -> main_page : Экспортировать документ
+    activate main_page
+    main_page -> sc : Запрос на экспорт документа
+    activate sc
+    sc -> context : Получить данные документа
+    activate context
+    context -> db : Запрос на получение данных документа
+    activate db
+    db -> db : Обработка данных
+    db --> context : Данные получены
+    deactivate db
+    context --> sc : Данные получены
+    deactivate context
+    sc --> main_page : Документ сформирован
+    deactivate sc
+    main_page --> user : Документ экспортирован
+    deactivate main_page
+@enduml 

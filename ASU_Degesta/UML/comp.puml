@@ -1,0 +1,75 @@
+﻿@startuml
+'https://plantuml.com/component-diagram
+
+component "Server"{
+    component "Авторизация" {
+     
+      file LoginController.cs as lc
+      file IdentityUser.cs as iu
+      file DegestaUser.cs as user
+            
+      lc .> user
+      user .> iu
+      lc - db
+    }
+    file ASU_DegestaContext.cs as context
+    component "Task"{
+         file CreateController.cs as cc
+         file MonthlyProductReleasePlan.cs as task
+         file SolveController.cs as sc
+         file PriceList.cs as price
+         file ForecastMaximumDemandProducts.cs as for
+         file ReportCostsProductionCapacity.cs as rep
+         file ReportAvailableEquipmentPerformance.cs as rep2
+                  
+         sc -.> IController
+         cc -- sc
+         
+         context -- cc
+         context -- db
+         
+         task .-l-> context
+         price .-l-> context
+         for .-l-> context
+         rep .-l-> context
+         rep2 .-l-> context
+    }
+    
+    component Handbooks{
+        file Units.cs as units
+        file TypesOfProducts.cs as types
+        
+        units -.-> context
+        types -.-> context
+    }
+}
+
+component "Client"{
+     file Create.cshtml as create
+     file Delete.cshtml as delete
+     file Detail.cshtml as detail
+     file Login.cshtml as login_page
+     login_page -- lc
+     create -- cc
+     delete -- cc
+     detail -- cc
+}
+component Program.exe as exe{
+file Program.cs
+}
+
+component Database as db{
+database "DBMS MySQL" {
+    }
+}
+exe -.> context
+
+component Frameworks{
+    file RazorPages.dll
+    file Identity.dll
+    file EntityFrameworkCore.dll
+}
+
+Frameworks <-. exe
+
+@enduml

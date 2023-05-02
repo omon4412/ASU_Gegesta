@@ -57,6 +57,7 @@ ForecastMaximumDemandProducts .-> ASU_DegestaContext
 PriceList .-> ASU_DegestaContext
 ReportAvailableEquipmentPerformance .-> ASU_DegestaContext
 ReportCostsProductionCapacity .-> ASU_DegestaContext
+MonthlyProductReleasePlan .-> ASU_DegestaContext
 
 interface IController interface1 {
     + View()
@@ -81,9 +82,9 @@ class CreateController control{
     + ReportAvailable : List<ReportAvailableEquipmentPerformance_id> 
 }
 
-MonthlyProductReleasePlan -.> CreateController
-CreateController <.- ASU_DegestaContext
-'CreateController -- SolveController
+'MonthlyProductReleasePlan -.> CreateController
+CreateController -- ASU_DegestaContext
+CreateController -u-- SolveController
 
 class types_of_products entity{
     + types_of_products_id : int 

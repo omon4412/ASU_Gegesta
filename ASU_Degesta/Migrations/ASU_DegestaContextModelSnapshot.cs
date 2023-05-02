@@ -357,6 +357,68 @@ namespace ASU_Degesta.Migrations
                     b.ToTable("ReportProductPlan_id");
                 });
 
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProfitabilityMonth", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("cost_price")
+                        .HasColumnType("double");
+
+                    b.Property<string>("doc_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<double>("profit")
+                        .HasColumnType("double");
+
+                    b.Property<double>("profitability")
+                        .HasColumnType("double");
+
+                    b.Property<double>("revenue")
+                        .HasColumnType("double");
+
+                    b.Property<string>("types_of_products_id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("units_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("doc_id");
+
+                    b.HasIndex("types_of_products_id");
+
+                    b.HasIndex("units_id");
+
+                    b.ToTable("ReportProfitabilityMonth");
+                });
+
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProfitabilityMonth_id", b =>
+                {
+                    b.Property<string>("doc_id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("creation_date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("creator")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("doc_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("doc_id");
+
+                    b.ToTable("ReportProfitabilityMonth_id");
+                });
+
             modelBuilder.Entity("ASU_Degesta.Models.ProductionDepartment.Equipments", b =>
                 {
                     b.Property<int>("EquipmentId")
@@ -919,6 +981,33 @@ namespace ASU_Degesta.Migrations
                         .IsRequired();
 
                     b.Navigation("ReportProductPlan_id");
+
+                    b.Navigation("TypesOfProducts");
+
+                    b.Navigation("Units");
+                });
+
+            modelBuilder.Entity("ASU_Degesta.Models.PED.ReportProfitabilityMonth", b =>
+                {
+                    b.HasOne("ASU_Degesta.Models.PED.ReportProfitabilityMonth_id", "ReportProfitabilityMonth_id")
+                        .WithMany()
+                        .HasForeignKey("doc_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.TypesOfProducts", "TypesOfProducts")
+                        .WithMany()
+                        .HasForeignKey("types_of_products_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASU_Degesta.Models.Handbooks.Units", "Units")
+                        .WithMany()
+                        .HasForeignKey("units_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReportProfitabilityMonth_id");
 
                     b.Navigation("TypesOfProducts");
 

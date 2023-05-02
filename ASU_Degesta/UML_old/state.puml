@@ -1,0 +1,17 @@
+﻿@startuml
+'https://plantuml.com/state-diagram
+
+scale 350 width
+[*] --> Авторизация : Cтраница сайта открыта
+
+state Авторизация {
+  state "Открытие страницы авторизации" as auto
+  state "Пользователь вводит данные" as input
+  state "Открытие страницы выбора отдела" as open_dep
+  state "Авторизация" as autoriz
+  state "Вывод ошибки" as error
+  auto --> input : Страница авторизации открыта
+  input --> autoriz : Данные введены
+  autoriz --> error : Неверные данные
+}
+@enduml

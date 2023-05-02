@@ -27,7 +27,7 @@
         {
             <a class="nav-link text-dark" asp-area="" asp-page="/Accounting/Index">Бухгалтерия</a>
         }
-        if (User.IsInRole("Начальник ПЭО") || User.IsInRole("Сотрудник ПЭО") || User.IsInRole("admin"))
+        if (User.IsInRole("Начальник ПЭО") || User.IsInRole("Начальник планово-экономического отдела") || User.IsInRole("admin"))
         {
             <a class="nav-link text-dark" asp-area="" asp-page="/PED/Index">Планово-экономический отдел</a>
         }

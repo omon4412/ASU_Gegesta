@@ -44,6 +44,11 @@
       <AdditionalFiles Include="Pages\PED\ReportProductPlan\Report\Details.cshtml" />
       <AdditionalFiles Include="Pages\PED\ReportProductPlan\Report\Edit.cshtml" />
       <AdditionalFiles Include="Pages\PED\ReportProductPlan\Report\Index.cshtml" />
+      <AdditionalFiles Include="Pages\PED\ReportProfitabilityMonth\Create.cshtml" />
+      <AdditionalFiles Include="Pages\PED\ReportProfitabilityMonth\Delete.cshtml" />
+      <AdditionalFiles Include="Pages\PED\ReportProfitabilityMonth\Details.cshtml" />
+      <AdditionalFiles Include="Pages\PED\ReportProfitabilityMonth\Index.cshtml" />
+      <AdditionalFiles Include="Pages\PED\ReportProfitabilityMonth\Report\Details.cshtml" />
       <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Create.cshtml" />
       <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Delete.cshtml" />
       <AdditionalFiles Include="Pages\ProductionDepartment\ReportCostsProductionCapacity\Report\Details.cshtml" />

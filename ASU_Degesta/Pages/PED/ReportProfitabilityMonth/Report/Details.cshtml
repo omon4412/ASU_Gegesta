@@ -1,0 +1,57 @@
+@page
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Подробнее";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProfitabilityMonth.types_of_products_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.TypesOfProductsList.Where(x => x.TypesOfProductsId == Model.ReportProfitabilityMonth.types_of_products_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProfitabilityMonth.revenue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportProfitabilityMonth.revenue)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProfitabilityMonth.cost_price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportProfitabilityMonth.cost_price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProfitabilityMonth.profit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportProfitabilityMonth.profit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProfitabilityMonth.units_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == Model.ReportProfitabilityMonth.units_id).FirstOrDefault().Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportProfitabilityMonth.profitability)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var t = Model.ReportProfitabilityMonth.profitability * 100; 
+                <span>@Math.Round(t,0) %</span>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.ReportProfitabilityMonth.doc_id">Вернуться к списку</a>
+</div>

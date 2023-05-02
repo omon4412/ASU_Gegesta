@@ -1,0 +1,254 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class __efmigrationshistory {
+   ProductVersion: varchar(32)
+   MigrationId: varchar(150)
+}
+class aspnetroleclaims {
+   RoleId: varchar(255)
+   ClaimType: longtext
+   ClaimValue: longtext
+   Id: int
+}
+class aspnetroles {
+   Name: varchar(256)
+   NormalizedName: varchar(256)
+   ConcurrencyStamp: longtext
+   Id: varchar(255)
+}
+class aspnetuserclaims {
+   UserId: varchar(255)
+   ClaimType: longtext
+   ClaimValue: longtext
+   Id: int
+}
+class aspnetuserlogins {
+   ProviderDisplayName: longtext
+   UserId: varchar(255)
+   LoginProvider: varchar(128)
+   ProviderKey: varchar(128)
+}
+class aspnetuserroles {
+   UserId: varchar(255)
+   RoleId: varchar(255)
+}
+class aspnetusers {
+   UserName: varchar(256)
+   NormalizedUserName: varchar(256)
+   Email: varchar(256)
+   NormalizedEmail: varchar(256)
+   EmailConfirmed: tinyint(1)
+   PasswordHash: longtext
+   SecurityStamp: longtext
+   ConcurrencyStamp: longtext
+   PhoneNumber: longtext
+   PhoneNumberConfirmed: tinyint(1)
+   TwoFactorEnabled: tinyint(1)
+   LockoutEnd: datetime(6)
+   LockoutEnabled: tinyint(1)
+   AccessFailedCount: int
+   Job: longtext
+   Name: longtext
+   Id: varchar(255)
+}
+class aspnetusertokens {
+   Value: longtext
+   UserId: varchar(255)
+   LoginProvider: varchar(128)
+   Name: varchar(128)
+}
+class equipments {
+   EquipmentName: longtext
+   EquipmentId: int
+}
+class forecastmaximumdemandproducts {
+   doc_id: varchar(255)
+   types_of_products_id: varchar(255)
+   demand: int
+   units_id: int
+   id: int
+}
+class forecastmaximumdemandproducts_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class monthlyproductreleaseplan {
+   doc_id: varchar(255)
+   types_of_products_id: varchar(255)
+   count: double
+   units_id: int
+   id: int
+}
+class monthlyproductreleaseplan_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class payroll_statement {
+   doc_id: varchar(50)
+   employee_number: int
+   employee_name: longtext
+   salary: double
+   bonus: longtext
+   total_accrued: longtext
+   withheld: longtext
+   to_issue: longtext
+   id: int
+}
+class payroll_statement_name_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class pricelist {
+   doc_id: varchar(255)
+   types_of_products_id: varchar(255)
+   price: int
+   units_id: int
+   id: int
+}
+class pricelist_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class reportavailableequipmentperformance {
+   doc_id: varchar(255)
+   perfomance: int
+   units_id: int
+   EquipmentId: int
+   id: int
+}
+class reportavailableequipmentperformance_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class reportcostsproductioncapacity {
+   doc_id: varchar(255)
+   EquipmentId: int
+   types_of_products_id: varchar(255)
+   costs: int
+   id: int
+}
+class reportcostsproductioncapacity_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class reportmatherialcosts {
+   doc_id: varchar(255)
+   types_of_products_id: varchar(255)
+   direct_costs: double
+   overhead_production_costs: double
+   general_business_invoices: double
+   units_id: int
+   id: int
+}
+class reportmatherialcosts_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class reportproductcost {
+   doc_id: varchar(255)
+   types_of_products_id: varchar(255)
+   cost_price: double
+   units_id: int
+   id: int
+}
+class reportproductcost_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class reportproductplan {
+   doc_id: varchar(255)
+   types_of_products_id: varchar(255)
+   produced: int
+   units_id: int
+   id: int
+}
+class reportproductplan_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class specificationcontractmaterials {
+   doc_id: varchar(255)
+   count_of_matherials: int
+   price_per_unit: double
+   price: double
+   units_id: int
+   types_of_products_id: varchar(255)
+   spec_units_id: int
+   id: int
+}
+class specificationcontractmaterials_id {
+   doc_name: longtext
+   creation_date: longtext
+   creator: longtext
+   doc_id: varchar(255)
+}
+class types_of_products {
+   code: longtext
+   Name: longtext
+   types_of_products_id: int
+}
+class typesofproducts {
+   Name: longtext
+   TypesOfProductsId: varchar(255)
+}
+class units {
+   Name: longtext
+   Units_ID: int
+}
+
+aspnetroleclaims                        -[#595959,plain]-^  aspnetroles                            : "RoleId:Id"
+aspnetuserclaims                        -[#595959,plain]-^  aspnetusers                            : "UserId:Id"
+aspnetuserlogins                        -[#595959,plain]-^  aspnetusers                            : "UserId:Id"
+aspnetuserroles                         -[#595959,plain]-^  aspnetroles                            : "RoleId:Id"
+aspnetuserroles                         -[#595959,plain]-^  aspnetusers                            : "UserId:Id"
+aspnetusertokens                        -[#595959,plain]-^  aspnetusers                            : "UserId:Id"
+forecastmaximumdemandproducts           -[#595959,plain]-^  forecastmaximumdemandproducts_id       : "doc_id"
+forecastmaximumdemandproducts           -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+forecastmaximumdemandproducts           -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+monthlyproductreleaseplan               -[#595959,plain]-^  monthlyproductreleaseplan_id           : "doc_id"
+monthlyproductreleaseplan               -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+monthlyproductreleaseplan               -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+payroll_statement                       -[#595959,plain]-^  payroll_statement_name_id              : "doc_id"
+pricelist                               -[#595959,plain]-^  pricelist_id                           : "doc_id"
+pricelist                               -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+pricelist                               -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+reportavailableequipmentperformance     -[#595959,plain]-^  equipments                             : "EquipmentId"
+reportavailableequipmentperformance     -[#595959,plain]-^  reportavailableequipmentperformance_id : "doc_id"
+reportavailableequipmentperformance     -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+reportcostsproductioncapacity           -[#595959,plain]-^  equipments                             : "EquipmentId"
+reportcostsproductioncapacity           -[#595959,plain]-^  reportcostsproductioncapacity_id       : "doc_id"
+reportcostsproductioncapacity           -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+reportmatherialcosts                    -[#595959,plain]-^  reportmatherialcosts_id                : "doc_id"
+reportmatherialcosts                    -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+reportmatherialcosts                    -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+reportproductcost                       -[#595959,plain]-^  reportproductcost_id                   : "doc_id"
+reportproductcost                       -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+reportproductcost                       -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+reportproductplan                       -[#595959,plain]-^  reportproductplan_id                   : "doc_id"
+reportproductplan                       -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+specificationcontractmaterials          -[#595959,plain]-^  specificationcontractmaterials_id      : "doc_id"
+specificationcontractmaterials          -[#595959,plain]-^  typesofproducts                        : "types_of_products_id:TypesOfProductsId"
+specificationcontractmaterials          -[#595959,plain]-^  units                                  : "units_id:Units_ID"
+@enduml

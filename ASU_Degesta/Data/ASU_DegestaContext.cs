@@ -70,4 +70,9 @@ public class ASU_DegestaContext : IdentityDbContext<DegestaUser>
     public DbSet<MonthlyProductReleasePlan> MonthlyProductReleasePlan { get; set; } = default!;
 
     public DbSet<MonthlyProductReleasePlan_id> MonthlyProductReleasePlan_id { get; set; } = default!;
+    
+    public DbSet<ReportProfitabilityMonth> ReportProfitabilityMonth { get; set; } = default!;
+
+    public DbSet<ReportProfitabilityMonth_id> ReportProfitabilityMonth_id { get; set; } = default!;
+    
 }
