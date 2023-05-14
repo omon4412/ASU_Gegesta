@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASU_Degesta.Pages.ProductionDepartment.ReportMatherialCosts
 {
-    [Authorize(Roles = "admin, Начальник производственного отдела")]
     public class DetailsModel : PageModel
     {
         private readonly ASU_Degesta.Data.ASU_DegestaContext _context;

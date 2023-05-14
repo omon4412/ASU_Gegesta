@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASU_Degesta.Pages.ProductionDepartment.ReportAvailableEquipmentPerformance
 {
-    [Authorize(Roles = "admin, Начальник производственного отдела")]
     public class DetailsModel : PageModel
     {
         private readonly ASU_Degesta.Data.ASU_DegestaContext _context;

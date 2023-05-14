@@ -7,27 +7,26 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<p>
-    @* <a asp-route-docid="@Model.info[0].doc_id" class="btn btn-primary" asp-page="Report/Create"> *@
-    @*     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"> *@
-    @*         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path> *@
-    @*     </svg> *@
-    @*     Добавить новую запись *@
-    @* </a> *@
+@{
+    if (User.IsInRole("admin") || User.IsInRole("Начальник планово-экономического отдела"))
+    {
+        <p>
+            <a class="btn btn-success" onclick="GetDocx()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-word-fill" viewBox="0 0 16 16">
+                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.485 6.879l1.036 4.144.997-3.655a.5.5 0 0 1 .964 0l.997 3.655 1.036-4.144a.5.5 0 0 1 .97.242l-1.5 6a.5.5 0 0 1-.967.01L8 9.402l-1.018 3.73a.5.5 0 0 1-.967-.01l-1.5-6a.5.5 0 1 1 .97-.242z"></path>
+                </svg> Экспорт в Word
+            </a>
+        </p>
 
-    <a class="btn btn-success" onclick="GetDocx()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-word-fill" viewBox="0 0 16 16">
-            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.485 6.879l1.036 4.144.997-3.655a.5.5 0 0 1 .964 0l.997 3.655 1.036-4.144a.5.5 0 0 1 .97.242l-1.5 6a.5.5 0 0 1-.967.01L8 9.402l-1.018 3.73a.5.5 0 0 1-.967-.01l-1.5-6a.5.5 0 1 1 .97-.242z"></path>
-        </svg> Экспорт в Word
-    </a>
-</p>
+        <a asp-page="./Index" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"></path>
+            </svg>
+            Вернуться к списку
+        </a>
+    }
+}
 
-<a asp-page="./Index" class="btn btn-primary">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"></path>
-    </svg>
-    Вернуться к списку
-</a>
 <table class="table">
     <thead>
     <tr>
@@ -56,9 +55,14 @@
             <td>
                 @Html.DisplayFor(modelItem => Model.UnitsList.Where(x => x.Units_ID == item.units_id).FirstOrDefault().Name)
             </td>
-            <td>
-                <a asp-page="./Report/Details" asp-route-docid="@item.doc_id" asp-route-id="@item.id">Подробнее</a>
-            </td>
+            @{
+                if (User.IsInRole("admin") || User.IsInRole("Начальник планово-экономического отдела"))
+                {
+                    <td>
+                        <a asp-page="./Report/Details" asp-route-docid="@item.doc_id" asp-route-id="@item.id">Подробнее</a>
+                    </td>
+                }
+            }
         </tr>
     }
     </tbody>

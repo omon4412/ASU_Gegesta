@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASU_Degesta.Pages.PED.ReportProductPlan
 {
-    [Authorize(Roles = "admin, Начальник планово-экономического отдела")]
     public class DetailsModel : PageModel
     {
         private readonly ASU_Degesta.Data.ASU_DegestaContext _context;

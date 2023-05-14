@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASU_Degesta.Pages.SalesDepartment.PriceList
 {
-    [Authorize(Roles = "admin, Менеджер по продажам")]
     public class DetailsModel : PageModel
     {
         private readonly ASU_Degesta.Data.ASU_DegestaContext _context;

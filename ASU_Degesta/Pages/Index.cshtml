@@ -39,6 +39,10 @@
         {
             <a class="nav-link text-dark" asp-area="" asp-page="/ProductionDepartment/Index">Производственный отдел</a>
         }
+        if (User.IsInRole("admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-page="/CheckDocument/Index">Проверка документов</a>
+        }
     }
     @* <p>Learn about <a target="_blank" href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
 </div>

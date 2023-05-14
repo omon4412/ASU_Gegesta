@@ -52,7 +52,7 @@ public class Index : PageModel
             await _userManager.AddToRoleAsync(_userManager.FindByNameAsync(User.Identity.Name).Result, Input.NewRole);
     }
 
-    public async Task<IActionResult> OnPostDelete(string id)
+    public async void OnPostDelete(string id)
     {
         IdentityRole role = await _roleManager.FindByIdAsync(id);
         if (role != null)
@@ -60,7 +60,7 @@ public class Index : PageModel
             if (role.Name == "admin")
             {
                 StatusMessage = "Админа удалить нельзя!";
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             IdentityResult result = await _roleManager.DeleteAsync(role);
@@ -74,7 +74,7 @@ public class Index : PageModel
             }
         }
 
-        return RedirectToAction("Index");
+        //return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> OnPostEdit(string id)

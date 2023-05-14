@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASU_Degesta.Pages.Accounting.PayrollStatements
 {
-    [Authorize(Roles = "admin, Бухгалтер")]
     public class DetailsModel : PageModel
     {
         private readonly ASU_Degesta.Data.ASU_DegestaContext _context;

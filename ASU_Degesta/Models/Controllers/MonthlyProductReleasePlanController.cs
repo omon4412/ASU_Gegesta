@@ -24,31 +24,6 @@ public class MonthlyProductReleasePlanController : Controller
             new Document(new Body()).Save(mainPart);
 
             Body body = mainPart.Document.Body;
-            var rp32 = new RunProperties()
-            {
-                FontSize = new FontSize()
-                {
-                    Val = new StringValue("32"),
-                },
-                RunFonts = new RunFonts()
-                {
-                    Ascii = "Times New Roman",
-                    HighAnsi = "Times New Roman"
-                }
-            };
-
-            var rp12 = new RunProperties()
-            {
-                FontSize = new FontSize()
-                {
-                    Val = new StringValue("24"),
-                },
-                RunFonts = new RunFonts()
-                {
-                    Ascii = "Times New Roman",
-                    HighAnsi = "Times New Roman"
-                }
-            };
 
             PageMargin pageMargin = new PageMargin();
             pageMargin.Top = 720;
@@ -78,16 +53,21 @@ public class MonthlyProductReleasePlanController : Controller
             body.Append(new Paragraph());
             body.Append(new Paragraph(new ParagraphProperties(
                     new Justification() {Val = JustificationValues.Center}),
-                new Run(rp32,
+                new Run(DataFabric.CreateTimesNewRoman16(),
                     new Text(
                         data.Report_ID.doc_name))));
             body.Append(new Paragraph());
 
             body.Append(new Paragraph(new ParagraphProperties(
                     new Justification() {Val = JustificationValues.Left}),
-                new Run(rp12,
+                new Run(DataFabric.CreateTimesNewRoman12(),
                     new Text("Дата формирования: " +
                              data.Report_ID.creation_date))));
+            body.Append(new Paragraph(new ParagraphProperties(
+                    new Justification() {Val = JustificationValues.Left}),
+                new Run(DataFabric.CreateTimesNewRoman12(),
+                    new Text("Серийный номер документа: " +
+                             data.Report_ID.doc_id))));
             body.Append(new Paragraph());
 
             var data_table = new List<List<string>>();

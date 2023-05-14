@@ -33,18 +33,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.rep_cost_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.rep_cost_id" asp-items="@(new SelectList(Model.rep_cost, nameof(ReportProductCost_id.doc_id), nameof(ReportProductCost_id.doc_name)))"></select>
+                <select class="form-select" oncontextmenu="openUrlOption(this, 'PED/ReportProductsCost/Details?id=')" asp-for="@Model.rep_cost_id" asp-items="@(new SelectList(Model.rep_cost, nameof(ReportProductCost_id.doc_id), nameof(ReportProductCost_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.rep_cost_id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.rep_plan_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.rep_plan_id" asp-items="@(new SelectList(Model.rep_plan, nameof(ReportProductPlan_id.doc_id), nameof(ReportProductPlan_id.doc_name)))"></select>
+                <select class="form-select" oncontextmenu="openUrlOption(this, 'PED/ReportProductPlan/Details?id=')" asp-for="@Model.rep_plan_id" asp-items="@(new SelectList(Model.rep_plan, nameof(ReportProductPlan_id.doc_id), nameof(ReportProductPlan_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.rep_plan_id" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.price_list_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.price_list_id" asp-items="@(new SelectList(Model.price_list, nameof(PriceList_id.doc_id), nameof(PriceList_id.doc_name)))"></select>
+                <select class="form-select" oncontextmenu="openUrlOption(this, 'SalesDepartment/PriceList/Details?id=')" asp-for="@Model.price_list_id" asp-items="@(new SelectList(Model.price_list, nameof(PriceList_id.doc_id), nameof(PriceList_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.price_list_id" class="text-danger"></span>
             </div>
 

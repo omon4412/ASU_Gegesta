@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Data.Common;
 using System.Text;
 using ASU_Degesta.Models;
 using ASU_Degesta.Models.Handbooks;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -89,7 +87,9 @@ namespace ASU_Degesta.Pages.PED.MonthlyProductReleasePlan
 
             if (fore.Count != price.Count || repava.Count != repcost.GroupBy(x => x.EquipmentId).ToList().Count)
             {
-                return Content("Ошибка в данных");
+                TempData["ErrorMessage"] = "Ошибка в данных";
+                return RedirectToPage("/Error");
+                //return Content("Ошибка в данных");
             }
 
             List<List<int>> data = new List<List<int>>();

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using ASU_Degesta.Models;
 using ASU_Degesta.Models.Accounting;
 using ASU_Degesta.Models.Handbooks;
@@ -44,10 +45,22 @@ namespace ASU_Degesta.Pages.PED.ReportProductsCost
         }
 
         [BindProperty] public ReportProductCost_id ReportProductCost_id { get; set; } = default!;
-        [BindProperty] public string Specification_id { get; set; } = default!;
-        [BindProperty] public string ReportMatherialCosts_id { get; set; } = default!;
-        [BindProperty] public string ReportProductPlan_id { get; set; } = default!;
-        [BindProperty] public string payroll_statement_id { get; set; } = default!;
+
+        [BindProperty]
+        [DisplayName("Спецификация к договору на поставку материалов")]
+        public string Specification_id { get; set; } = default!;
+
+        [BindProperty]
+        [DisplayName("Отчёт о материальных затратах на производство каждого изделия")]
+        public string ReportMatherialCosts_id { get; set; } = default!;
+
+        [BindProperty]
+        [DisplayName("Отчёт выполнения плана изделий в номенклатуре за месяц")]
+        public string ReportProductPlan_id { get; set; } = default!;
+
+        [BindProperty]
+        [DisplayName("Расчётная ведомость по зарплате")]
+        public string payroll_statement_id { get; set; } = default!;
 
 
         public async Task<IActionResult> OnPostAsync()

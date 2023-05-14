@@ -33,24 +33,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Forecast_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.Forecast_id" asp-items="@(new SelectList(Model.Forecast, nameof(ForecastMaximumDemandProducts_id.doc_id), nameof(ForecastMaximumDemandProducts_id.doc_name)))"></select>
+                <select id="mySelect" class="form-select" oncontextmenu="openUrlOption(this, 'SalesDepartment/ForecastMaximumDemandProducts/Details?id=')" asp-for="@Model.Forecast_id" asp-items="@(new SelectList(Model.Forecast, nameof(ForecastMaximumDemandProducts_id.doc_id), nameof(ForecastMaximumDemandProducts_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.Forecast_id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Price_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.Price_id" asp-items="@(new SelectList(Model.Price, nameof(PriceList_id.doc_id), nameof(PriceList_id.doc_name)))"></select>
+                <select class="form-select" oncontextmenu="openUrlOption(this, 'SalesDepartment/PriceList/Details?id=')" asp-for="@Model.Price_id" asp-items="@(new SelectList(Model.Price, nameof(PriceList_id.doc_id), nameof(PriceList_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.Price_id" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.ReportCosts_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.ReportCosts_id" asp-items="@(new SelectList(Model.ReportCost, nameof(ReportCostsProductionCapacity_id.doc_id), nameof(ReportCostsProductionCapacity_id.doc_name)))"></select>
+                <select class="form-select" oncontextmenu="openUrlOption(this, 'ProductionDepartment/ReportCostsProductionCapacity/Details?id=')" asp-for="@Model.ReportCosts_id" asp-items="@(new SelectList(Model.ReportCost, nameof(ReportCostsProductionCapacity_id.doc_id), nameof(ReportCostsProductionCapacity_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.ReportCosts_id" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.ReportAvailable_id" class="control-label"></label>
-                <select class="form-select" asp-for="@Model.ReportAvailable_id" asp-items="@(new SelectList(Model.ReportAvailable, nameof(ReportAvailableEquipmentPerformance_id.doc_id), nameof(ReportAvailableEquipmentPerformance_id.doc_name)))"></select>
+                <select class="form-select" oncontextmenu="openUrlOption(this, 'ProductionDepartment/ReportAvailableEquipmentPerformance/Details?id=')" asp-for="@Model.ReportAvailable_id" asp-items="@(new SelectList(Model.ReportAvailable, nameof(ReportAvailableEquipmentPerformance_id.doc_id), nameof(ReportAvailableEquipmentPerformance_id.doc_name)))"></select>
                 <span asp-validation-for="@Model.ReportAvailable_id" class="text-danger"></span>
             </div>
 
