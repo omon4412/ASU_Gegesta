@@ -25,6 +25,6 @@ public class UserList : PageModel
 
     public async Task OnGet()
     {
-        UserRoles = await _userManager.GetRolesAsync(_userManager.GetUserAsync(HttpContext.User).Result);
+        //UserRoles = await _userManager.GetRolesAsync(_userManager.GetUserAsync(HttpContext.User).Result);
     }
 }

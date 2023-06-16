@@ -22,13 +22,12 @@
             }
 
             <td>
-
-                @foreach (IdentityRole role in RoleManager.Roles.ToList())
+                @foreach (var role in UserManager.GetRolesAsync(user).Result)
                 {
-                    if (await UserManager.IsInRoleAsync(user, role.Name))
-                    {
-                        <button type="button" disabled class="btn btn-outline-dark">@role.Name</button>
-                    }
+                    //if (await UserManager.IsInRoleAsync(user, role.Name))
+                    //{
+                        <button type="button" disabled class="btn btn-outline-dark">@role</button>
+                    //}
                 }
             </td>
             <td>

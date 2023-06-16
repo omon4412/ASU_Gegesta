@@ -23,7 +23,7 @@
 <div>
     @if (User.IsInRole("admin"))
     {
-        <a asp-page="./Edit" asp-route-id="@Model.Units?.Units_ID">Edit</a>
+        <a asp-page="./Edit" asp-route-id="@Model.Units?.Units_ID">Редактировать</a>
     }
     <a asp-page="./Index">Назад к списку</a>
 </div>

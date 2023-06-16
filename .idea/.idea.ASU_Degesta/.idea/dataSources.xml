@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/asu_degesta</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@HOST" uuid="32b46b33-b868-4d87-89c1-6b31721cbf6c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://MYSQL6008.site4now.net:3306/db_a98b1a_degesta</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

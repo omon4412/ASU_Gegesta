@@ -10,6 +10,7 @@ namespace ASU_Degesta.Models.Controllers;
 [Route("api/SolveTheTask")]
 public class SolveController : Controller
 {
+    [AllowAnonymous]
     public string OnPost([FromBody] Data dataFromFront)
     {
         JArray json = JArray.Parse(dataFromFront.json);
